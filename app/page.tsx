@@ -49,7 +49,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center min-h-[80vh]">
       <div className="text-center mb-16 relative">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 animate-pulse">
-          OneForAll
+          AllForWeb
         </h1>
         <p className="text-xl md:text-2xl text-slate-300 max-w-2xl font-light">
           Your premium, unified toolkit for everyday development and productivity.

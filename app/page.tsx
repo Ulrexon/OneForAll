@@ -1,16 +1,8 @@
 import Link from "next/link";
-import { Download, Fingerprint, Code, Hash, FileJson, ArrowRight } from "lucide-react";
+import { Fingerprint, Code, Hash, FileJson, ArrowRight } from "lucide-react";
 
 export default function Home() {
   const tools = [
-    {
-      title: "YouTube Downloader",
-      description: "Fast and reliable YouTube video & audio downloader.",
-      icon: <Download className="w-8 h-8 text-indigo-400" />,
-      href: "/tools/youtube",
-      color: "from-indigo-500/20 to-purple-500/0",
-      border: "hover:border-indigo-500/50"
-    },
     {
       title: "Base64 Encoder/Decoder",
       description: "Instantly encode or decode text and files in Base64.",

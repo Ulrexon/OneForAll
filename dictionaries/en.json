@@ -1,0 +1,126 @@
+{
+  "dashboard": {
+    "title": "AllForWeb",
+    "subtitle": "Your premium, unified toolkit for everyday development and productivity.",
+    "searchPlaceholder": "Search tools by name or description...",
+    "tabDev": "Developer Tools",
+    "tabCalc": "Calculators",
+    "tabFocus": "Relax & Focus",
+    "noToolsTitle": "No tools found",
+    "noToolsDesc": "We couldn't find any tools matching",
+    "tools": {
+      "zenPomodoro": { "title": "Zen Pomodoro", "desc": "Boost productivity with deep-work timers and native algorithmic brown noise." },
+      "typingTest": { "title": "Speed Typing Test", "desc": "Test your Words Per Minute (WPM) accuracy and speed." },
+      "textAnalyzer": { "title": "Text Analyzer", "desc": "Get real-time word counts, stats, and keyword density from texts." },
+      "colorPicker": { "title": "Color Picker", "desc": "Extract pixel-perfect color palettes directly from your images." },
+      "qrGenerator": { "title": "QR Code Generator", "desc": "Create customizable, high-resolution QR codes in seconds." },
+      "glassmorphism": { "title": "Glassmorphism Generator", "desc": "Visually generate the incredibly satisfying frosted-glass CSS effect." },
+      "imageConverter": { "title": "Image Converter", "desc": "Convert images seamlessly between WebP, PNG, and JPEG instantly." },
+      "base64": { "title": "Base64 Encoder/Decoder", "desc": "Instantly encode or decode text and strings to Base64 format." },
+      "json": { "title": "JSON Formatter", "desc": "Format, validate, and beautify your JSON data structures securely." },
+      "jwt": { "title": "JWT Decoder", "desc": "Decode JSON Web Tokens and inspect headers, claims, and payloads." },
+      "uuid": { "title": "UUID v4 Generator", "desc": "Generate universally unique secure identifiers in bulk." },
+      "vatCalculator": { "title": "VAT Calculator", "desc": "Instantly calculate prices with or without VAT, breaking down the exact tax amount." }
+    }
+  },
+  "tools": {
+    "pomodoro": {
+      "zenMode": "Zen Mode",
+      "breakMode": "Break Mode",
+      "start": "Start Focus",
+      "pause": "Pause",
+      "resume": "Resume",
+      "stop": "Stop & Reset",
+      "ambientOn": "Ambient Noise On",
+      "ambientOff": "Ambient Noise Off",
+      "focusFinished": "Focus session finished!",
+      "takeBreak": "Take a break."
+    },
+    "typing": {
+      "start": "Start Typing",
+      "wpm": "WPM",
+      "accuracy": "Accuracy",
+      "errors": "Errors",
+      "time": "Time",
+      "reset": "Reset Test",
+      "prompt": "Type the text below as fast as you can",
+      "complete": "Test Complete!"
+    },
+    "colorPicker": {
+      "upload": "Upload Image",
+      "dragDrop": "Or drag and drop an image here",
+      "instruction": "Click anywhere on the image to pick a color",
+      "selected": "Selected Color",
+      "copy": "Copy"
+    },
+    "qr": {
+      "enterText": "Enter URL or Text",
+      "fgColor": "Foreground Color",
+      "bgColor": "Background Color",
+      "padding": "Padding",
+      "download": "Download QR Code"
+    },
+    "glass": {
+      "blur": "Blur",
+      "opacity": "Opacity",
+      "outline": "Outline",
+      "color": "Color Mode",
+      "css": "CSS Code",
+      "tailwind": "Tailwind Equivalent",
+      "copy": "Copy to Clipboard",
+      "copied": "Copied!"
+    },
+    "text": {
+      "placeholder": "Paste or type your text here...",
+      "words": "Words",
+      "chars": "Characters",
+      "readingTime": "Reading Time",
+      "minutes": "min",
+      "keywordDensity": "Keyword Density",
+      "clear": "Clear Text"
+    },
+    "base64": {
+      "encode": "Encode",
+      "decode": "Decode",
+      "inputPlaceholder": "Enter text to process...",
+      "outputPlaceholder": "Result will appear here...",
+      "copy": "Copy Result"
+    },
+    "json": {
+      "placeholder": "Paste your JSON array or object here...",
+      "format": "Format JSON",
+      "minify": "Minify JSON",
+      "clear": "Clear",
+      "copy": "Copy Result",
+      "valid": "Valid JSON",
+      "invalid": "Invalid JSON mapping"
+    },
+    "jwt": {
+      "placeholder": "Paste your JWT string here (ey...).",
+      "header": "Header (Algorithm & Token Type)",
+      "payload": "Payload (Data & Claims)",
+      "invalid": "Invalid JWT Format"
+    },
+    "uuid": {
+      "generate": "Generate UUIDs",
+      "quantity": "Quantity to Generate",
+      "copyAll": "Copy All",
+      "uppercase": "Uppercase format",
+      "hyphens": "Include Hyphens"
+    },
+    "image": {
+      "upload": "Upload Image to Convert",
+      "format": "Target Format",
+      "quality": "Quality",
+      "convert": "Convert & Download"
+    },
+    "vat": {
+      "basePrice": "Base Price (Excl. VAT)",
+      "vatRate": "VAT Percentage",
+      "vatAmount": "VAT Amount",
+      "totalPrice": "Total Price (Incl. VAT)",
+      "customRate": "Custom",
+      "placeholder": "0.00"
+    }
+  }
+}

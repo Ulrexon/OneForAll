@@ -1,0 +1,126 @@
+{
+  "dashboard": {
+    "title": "AllForWeb",
+    "subtitle": "Votre boîte à outils premium et unifiée pour le développement quotidien et la productivité.",
+    "searchPlaceholder": "Rechercher des outils par nom ou description...",
+    "tabDev": "Outils de Développement",
+    "tabCalc": "Calculs",
+    "tabFocus": "Détente & Concentration",
+    "noToolsTitle": "Aucun outil trouvé",
+    "noToolsDesc": "Nous n'avons trouvé aucun outil correspondant à",
+    "tools": {
+      "zenPomodoro": { "title": "Pomodoro Zen", "desc": "Augmentez la productivité avec des minuteries de travail profond et un bruit brun algorithmique." },
+      "typingTest": { "title": "Test de Vitesse de Frappe", "desc": "Testez votre précision et votre vitesse en Mots Par Minute (MPM)." },
+      "textAnalyzer": { "title": "Analyseur de Texte", "desc": "Obtenez le nombre de mots en temps réel, les statistiques et la densité des mots clés." },
+      "colorPicker": { "title": "Sélecteur de Couleurs", "desc": "Extrayez des palettes de couleurs parfaites au pixel près directement depuis vos images." },
+      "qrGenerator": { "title": "Générateur de Code QR", "desc": "Créez des codes QR personnalisables et haute résolution en quelques secondes." },
+      "glassmorphism": { "title": "Générateur de Glassmorphism", "desc": "Générez visuellement l'effet CSS de verre dépoli incroyablement satisfaisant." },
+      "imageConverter": { "title": "Convertisseur d'Images", "desc": "Convertissez des images de manière transparente entre WebP, PNG et JPEG instantanément." },
+      "base64": { "title": "Encodeur/Décodeur Base64", "desc": "Encodez ou décodez instantanément du texte et des chaînes au format Base64." },
+      "json": { "title": "Formateur JSON", "desc": "Formatez, validez et embellissez vos structures de données JSON en toute sécurité." },
+      "jwt": { "title": "Décodeur JWT", "desc": "Décodez les JWT et inspectez les en-têtes, les revendications et les charges utiles." },
+      "uuid": { "title": "Générateur UUID v4", "desc": "Générez des identifiants sécurisés universellement uniques en vrac." },
+      "vatCalculator": { "title": "Calculatrice de TVA", "desc": "Calculez instantanément les prix avec ou sans TVA en détaillant le montant exact de la taxe." }
+    }
+  },
+  "tools": {
+    "pomodoro": {
+      "zenMode": "Mode Zen",
+      "breakMode": "Mode Pause",
+      "start": "Démarrer Focus",
+      "pause": "Pause",
+      "resume": "Reprendre",
+      "stop": "Arrêter et Réinitialiser",
+      "ambientOn": "Bruit Ambiant Activé",
+      "ambientOff": "Bruit Ambiant Désactivé",
+      "focusFinished": "Session de focus terminée!",
+      "takeBreak": "Prenez une pause."
+    },
+    "typing": {
+      "start": "Commencer à Taper",
+      "wpm": "MPM",
+      "accuracy": "Précision",
+      "errors": "Erreurs",
+      "time": "Temps",
+      "reset": "Réinitialiser le Test",
+      "prompt": "Tapez le texte ci-dessous aussi vite que possible",
+      "complete": "Test Terminé!"
+    },
+    "colorPicker": {
+      "upload": "Télécharger l'image",
+      "dragDrop": "Ou déposez une image ici",
+      "instruction": "Cliquez n'importe où sur l'image pour choisir une couleur",
+      "selected": "Couleur Sélectionnée",
+      "copy": "Copier"
+    },
+    "qr": {
+      "enterText": "Entrez URL ou Texte",
+      "fgColor": "Couleur de Premier Plan",
+      "bgColor": "Couleur de Fond",
+      "padding": "Marge Intérieure",
+      "download": "Télécharger le Code QR"
+    },
+    "glass": {
+      "blur": "Flou",
+      "opacity": "Opacité",
+      "outline": "Contour",
+      "color": "Mode de Couleur",
+      "css": "Code CSS",
+      "tailwind": "Équivalent Tailwind",
+      "copy": "Copier dans le presse-papiers",
+      "copied": "Copié!"
+    },
+    "text": {
+      "placeholder": "Collez ou tapez votre texte ici...",
+      "words": "Mots",
+      "chars": "Caractères",
+      "readingTime": "Temps de Lecture",
+      "minutes": "min",
+      "keywordDensity": "Densité de Mots-clés",
+      "clear": "Effacer le Texte"
+    },
+    "base64": {
+      "encode": "Encoder",
+      "decode": "Décoder",
+      "inputPlaceholder": "Saisissez le texte à traiter...",
+      "outputPlaceholder": "Le résultat apparaîtra ici...",
+      "copy": "Copier le Résultat"
+    },
+    "json": {
+      "placeholder": "Collez votre tableau ou objet JSON ici...",
+      "format": "Formater JSON",
+      "minify": "Minifier JSON",
+      "clear": "Effacer",
+      "copy": "Copier le Résultat",
+      "valid": "JSON Valide",
+      "invalid": "Mappage JSON invalide"
+    },
+    "jwt": {
+      "placeholder": "Collez votre chaîne JWT ici (ey...).",
+      "header": "En-tête (Algorithme et Type de Token)",
+      "payload": "Payload (Données et Claims)",
+      "invalid": "Format JWT Invalide"
+    },
+    "uuid": {
+      "generate": "Générer UUIDs",
+      "quantity": "Quantité à Générer",
+      "copyAll": "Tout Copier",
+      "uppercase": "Format en majuscules",
+      "hyphens": "Inclure des Traits d'union (-)"
+    },
+    "image": {
+      "upload": "Télécharger l'image pour convertir",
+      "format": "Format Cible",
+      "quality": "Qualité",
+      "convert": "Convertir et Télécharger"
+    },
+    "vat": {
+      "basePrice": "Prix de Base (HT)",
+      "vatRate": "Pourcentage de TVA",
+      "vatAmount": "Montant de la TVA",
+      "totalPrice": "Prix Total (TTC)",
+      "customRate": "Personnalisé",
+      "placeholder": "0.00"
+    }
+  }
+}

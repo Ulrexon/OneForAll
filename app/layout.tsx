@@ -11,6 +11,9 @@ const interFont = Inter({
 export const metadata: Metadata = {
   title: "AllForWeb Toolkit",
   description: "A modern, premium utility toolkit for everyday developer tasks.",
+  verification: {
+    google: "kWc-_brHOYY1Q9sHm4Pb-eHd3q-NhEiMJzDzMU1-CAw",
+  },
   other: {
     "google-adsense-account": "ca-pub-1141041890300704",
   },

@@ -148,20 +148,20 @@ export default function TimeCalculator() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto pb-20">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
       
       {/* Non-Printable Header */}
-      <div className="flex items-center justify-between mb-8 print:hidden">
-        <div className="flex items-center">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-6 print:hidden">
+        <div className="flex items-start md:items-center">
           <Link
             href="/?tab=calc"
-            className="mr-4 p-2 rounded-full hover:bg-white/10 transition-colors inline-block"
+            className="mr-4 p-2 rounded-full hover:bg-white/10 transition-colors inline-block shrink-0 mt-1 md:mt-0"
           >
             <ArrowLeft className="w-6 h-6 text-slate-300" />
           </Link>
           <div>
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 flex items-center">
-              {dict.dashboard.tools.timeCalculator.title} <Clock className="ml-3 w-8 h-8 text-cyan-400" />
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 flex items-center flex-wrap gap-2">
+              {dict.dashboard.tools.timeCalculator.title} <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 shrink-0" />
             </h1>
             <p className="text-slate-400 mt-2">
               {dict.dashboard.tools.timeCalculator.desc}
@@ -169,27 +169,27 @@ export default function TimeCalculator() {
           </div>
         </div>
         
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4 w-full md:w-auto">
           <button
             onClick={clearAll}
-            className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white font-medium border border-white/10 flex items-center transition-all"
+            className="flex-1 md:flex-none justify-center px-4 py-3 sm:py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white font-medium border border-white/10 flex items-center transition-all min-w-[3rem]"
             title={dict.tools.time.clearAll}
           >
-            <RefreshCcw className="w-4 h-4 sm:mr-2" />
+            <RefreshCcw className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2" />
             <span className="hidden sm:inline">{dict.tools.time.clearAll}</span>
           </button>
           <button
             onClick={handleDownloadPDF}
-            className="px-6 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold shadow-lg shadow-emerald-500/25 flex items-center transition-all"
+            className="flex-1 md:flex-none justify-center px-6 py-3 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold shadow-lg shadow-emerald-500/25 flex items-center transition-all min-w-[3rem]"
           >
-            <Download className="w-4 h-4 sm:mr-2" />
+            <Download className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2" />
             <span className="hidden sm:inline">PDF</span>
           </button>
           <button
             onClick={handlePrint}
-            className="px-6 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold shadow-lg shadow-cyan-500/25 flex items-center transition-all"
+            className="flex-1 md:flex-none justify-center px-6 py-3 sm:py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold shadow-lg shadow-cyan-500/25 flex items-center transition-all min-w-[3rem]"
           >
-            <Printer className="w-4 h-4 sm:mr-2" />
+            <Printer className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2" />
             <span className="hidden sm:inline">{dict.tools.time.print}</span>
           </button>
         </div>
@@ -210,7 +210,7 @@ export default function TimeCalculator() {
         <div className="lg:col-span-7 bg-black/40 print:bg-transparent backdrop-blur-md border border-white/10 print:border-none rounded-3xl p-6 lg:p-8 print:p-0 shadow-2xl print:shadow-none print:text-black">
           
           <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10 print:border-black/20">
-             <div className="flex gap-16 font-semibold text-slate-400 print:text-black uppercase tracking-wider text-sm">
+             <div className="flex gap-8 sm:gap-16 font-semibold text-slate-400 print:text-black uppercase tracking-wider text-sm">
                 <span>{dict.tools.time.hours}</span>
                 <span>{dict.tools.time.minutes}</span>
              </div>
@@ -227,16 +227,16 @@ export default function TimeCalculator() {
 
               return (
                 <div key={entry.id} className="flex items-center justify-between group">
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 sm:gap-4">
                     <div className="relative">
                       <input
                         type="text"
                         placeholder="00"
                         value={entry.h}
                         onChange={(e) => updateEntry(entry.id, "h", e.target.value)}
-                        className="w-20 print:w-16 bg-black/50 print:bg-transparent border border-white/10 print:border-b print:border-black/20 print:border-x-0 print:border-t-0 print:rounded-none rounded-xl py-3 print:py-1 text-center text-white text-xl font-bold focus:outline-none focus:ring-2 focus:ring-cyan-500/50 font-mono transition-all print:text-black"
+                        className="w-16 sm:w-20 print:w-16 bg-black/50 print:bg-transparent border border-white/10 print:border-b print:border-black/20 print:border-x-0 print:border-t-0 print:rounded-none rounded-xl py-3 print:py-1 text-center text-white text-xl font-bold focus:outline-none focus:ring-2 focus:ring-cyan-500/50 font-mono transition-all print:text-black"
                       />
-                      <span className="absolute -right-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold hidden sm:block print:block">:</span>
+                      <span className="absolute -right-2 sm:-right-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold hidden sm:block print:block">:</span>
                     </div>
                     
                     <div className="relative">
@@ -245,13 +245,13 @@ export default function TimeCalculator() {
                         placeholder="00"
                         value={entry.m}
                         onChange={(e) => updateEntry(entry.id, "m", e.target.value)}
-                        className="w-20 print:w-16 bg-black/50 print:bg-transparent border border-white/10 print:border-b print:border-black/20 print:border-x-0 print:border-t-0 print:rounded-none rounded-xl py-3 print:py-1 text-center text-white text-xl font-bold focus:outline-none focus:ring-2 focus:ring-cyan-500/50 font-mono transition-all print:text-black"
+                        className="w-16 sm:w-20 print:w-16 bg-black/50 print:bg-transparent border border-white/10 print:border-b print:border-black/20 print:border-x-0 print:border-t-0 print:rounded-none rounded-xl py-3 print:py-1 text-center text-white text-xl font-bold focus:outline-none focus:ring-2 focus:ring-cyan-500/50 font-mono transition-all print:text-black"
                       />
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-6">
-                    <span className="text-lg font-mono text-cyan-400 print:text-black font-semibold min-w-[60px] text-right hidden sm:block print:block">
+                  <div className="flex items-center gap-2 sm:gap-6">
+                    <span className="text-lg font-mono text-cyan-400 print:text-black font-semibold min-w-[40px] sm:min-w-[60px] text-right hidden sm:block print:block">
                       {rowDecimal}
                     </span>
                     
@@ -301,7 +301,7 @@ export default function TimeCalculator() {
                   </div>
                </div>
 
-               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/10">
                  <div>
                     <label className="block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">
                       {dict.tools.time.name}
@@ -321,7 +321,7 @@ export default function TimeCalculator() {
                       type="date"
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
-                      className="w-full bg-black/50 border border-white/10 rounded-xl py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50"
+                      className="w-full bg-black/50 border border-white/10 rounded-xl py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 text-[10px] sm:text-base leading-none"
                     />
                  </div>
                </div>

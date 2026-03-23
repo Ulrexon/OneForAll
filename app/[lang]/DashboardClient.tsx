@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon, Search, QrCode, Palette, FileText, Gamepad2, Hammer, Sliders, Timer, Calculator } from "lucide-react";
+import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon, Search, QrCode, Palette, FileText, Gamepad2, Hammer, Sliders, Timer, Calculator, Clock } from "lucide-react";
 
 export default function DashboardClient({ dict, lang }: { dict: any; lang: string }) {
   const router = useRouter();
@@ -147,6 +147,15 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
       href: `/${lang}/tools/vat-calculator`,
       color: "from-indigo-500/20 to-blue-500/0",
       border: "hover:border-indigo-500/50",
+      category: "calc"
+    },
+    {
+      title: dict.dashboard.tools.timeCalculator.title,
+      description: dict.dashboard.tools.timeCalculator.desc,
+      icon: <Clock className="w-8 h-8 text-cyan-400" />,
+      href: `/${lang}/tools/time-calculator`,
+      color: "from-cyan-500/20 to-sky-500/0",
+      border: "hover:border-cyan-500/50",
       category: "calc"
     }
   ];

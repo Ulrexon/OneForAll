@@ -20,7 +20,8 @@
       "json": { "title": "JSON Formatter", "desc": "Format, validate, and beautify your JSON data structures securely." },
       "jwt": { "title": "JWT Decoder", "desc": "Decode JSON Web Tokens and inspect headers, claims, and payloads." },
       "uuid": { "title": "UUID v4 Generator", "desc": "Generate universally unique secure identifiers in bulk." },
-      "vatCalculator": { "title": "VAT Calculator", "desc": "Instantly calculate prices with or without VAT, breaking down the exact tax amount." }
+      "vatCalculator": { "title": "VAT Calculator", "desc": "Instantly calculate prices with or without VAT, breaking down the exact tax amount." },
+      "timeCalculator": { "title": "Time & Pay Calculator", "desc": "Sum hours, calculate the decimal equivalent, and get the total pay instantly." }
     }
   },
   "tools": {
@@ -121,6 +122,23 @@
       "totalPrice": "Total Price (Incl. VAT)",
       "customRate": "Custom",
       "placeholder": "0.00"
+    },
+    "time": {
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "decimal": "Decimal",
+      "addEntry": "Add Time Entry",
+      "remove": "Remove",
+      "clearAll": "Clear All",
+      "hourlyRate": "Hourly Rate",
+      "ratePlaceholder": "Enter rate",
+      "totalHours": "Total Hours",
+      "totalDecimal": "Total Decimal",
+      "totalPay": "Total Pay",
+      "name": "Name (Optional)",
+      "date": "Date (Optional)",
+      "print": "Print Receipt",
+      "receipt": "Time Receipt"
     }
   }
 }

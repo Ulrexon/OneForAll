@@ -13,7 +13,8 @@ const TOOL_ROUTES = {
   'json': 'json',
   'jwt': 'jwt',
   'uuid': 'uuid',
-  'vat-calculator': 'vatCalculator'
+  'vat-calculator': 'vatCalculator',
+  'time-calculator': 'timeCalculator'
 };
 
 const BASE_DIR = path.join(__dirname, 'app', '[lang]', 'tools');

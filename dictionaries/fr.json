@@ -20,7 +20,8 @@
       "json": { "title": "Formateur JSON", "desc": "Formatez, validez et embellissez vos structures de données JSON en toute sécurité." },
       "jwt": { "title": "Décodeur JWT", "desc": "Décodez les JWT et inspectez les en-têtes, les revendications et les charges utiles." },
       "uuid": { "title": "Générateur UUID v4", "desc": "Générez des identifiants sécurisés universellement uniques en vrac." },
-      "vatCalculator": { "title": "Calculatrice de TVA", "desc": "Calculez instantanément les prix avec ou sans TVA en détaillant le montant exact de la taxe." }
+      "vatCalculator": { "title": "Calculatrice de TVA", "desc": "Calculez instantanément les prix avec ou sans TVA en détaillant le montant exact de la taxe." },
+      "timeCalculator": { "title": "Calculatrice d'Heures", "desc": "Additionnez les heures, calculez l'équivalent décimal et obtenez le paiement total instantanément." }
     }
   },
   "tools": {
@@ -121,6 +122,23 @@
       "totalPrice": "Prix Total (TTC)",
       "customRate": "Personnalisé",
       "placeholder": "0.00"
+    },
+    "time": {
+      "hours": "Heures",
+      "minutes": "Minutes",
+      "decimal": "Décimal",
+      "addEntry": "Ajouter une Ligne",
+      "remove": "Supprimer",
+      "clearAll": "Tout Effacer",
+      "hourlyRate": "Taux horaire",
+      "ratePlaceholder": "Entrez le taux",
+      "totalHours": "Heures Totales",
+      "totalDecimal": "Total Décimal",
+      "totalPay": "Paiement Total",
+      "name": "Nom (Optionnel)",
+      "date": "Date (Optionnelle)",
+      "print": "Imprimer le Reçu",
+      "receipt": "Reçu de Temps"
     }
   }
 }

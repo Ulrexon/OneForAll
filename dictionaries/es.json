@@ -20,7 +20,8 @@
       "json": { "title": "Formateador JSON", "desc": "Formatea, valida y embellece tus estructuras de datos JSON de forma segura." },
       "jwt": { "title": "Decodificador JWT", "desc": "Decodifica JSON Web Tokens e inspecciona encabezados, claims y payloads." },
       "uuid": { "title": "Generador de UUID v4", "desc": "Genera de forma masiva identificadores seguros únicos a nivel global." },
-      "vatCalculator": { "title": "Calculadora de IVA", "desc": "Calcula instantáneamente precios con o sin IVA desglosando el importe exacto." }
+      "vatCalculator": { "title": "Calculadora de IVA", "desc": "Calcula instantáneamente precios con o sin IVA desglosando el importe exacto." },
+      "timeCalculator": { "title": "Calculadora de Horas", "desc": "Suma horas, calcula el equivalente decimal y obtén el pago total al instante." }
     }
   },
   "tools": {
@@ -121,6 +122,23 @@
       "totalPrice": "Precio Total (Con IVA)",
       "customRate": "Personalizado",
       "placeholder": "0.00"
+    },
+    "time": {
+      "hours": "Horas",
+      "minutes": "Minutos",
+      "decimal": "Decimal",
+      "addEntry": "Añadir Línea",
+      "remove": "Eliminar",
+      "clearAll": "Limpiar Todo",
+      "hourlyRate": "Tarifa por hora",
+      "ratePlaceholder": "Escribe aquí",
+      "totalHours": "Horas Totales",
+      "totalDecimal": "Total Decimal",
+      "totalPay": "Pago Total",
+      "name": "Nombre (Opcional)",
+      "date": "Fecha (Opcional)",
+      "print": "Imprimir Recibo",
+      "receipt": "Comprobante de Tiempo"
     }
   }
 }

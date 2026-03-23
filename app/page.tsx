@@ -1,13 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon, Search, QrCode, Palette, FileText, Gamepad2, Hammer, Sliders, Timer } from "lucide-react";
 
-export default function Home() {
+function Dashboard() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const tabParam = searchParams.get("tab");
+  const activeTab = tabParam === "focus" ? "focus" : "dev";
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState<"dev" | "focus">("dev");
+
+  const handleTabChange = (tab: "dev" | "focus") => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", tab);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   const tools = [
     {
@@ -147,7 +160,7 @@ export default function Home() {
       {/* Tabs */}
       <div className="flex bg-black/50 rounded-xl p-1 border border-white/5 w-fit mx-auto mb-10 z-20 relative">
         <button
-          onClick={() => setActiveTab("dev")}
+          onClick={() => handleTabChange("dev")}
           className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${activeTab === "dev"
               ? "bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/30 shadow-lg"
               : "text-slate-400 hover:text-white"
@@ -157,7 +170,7 @@ export default function Home() {
           Developer Tools
         </button>
         <button
-          onClick={() => setActiveTab("focus")}
+          onClick={() => handleTabChange("focus")}
           className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${activeTab === "focus"
               ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-lg"
               : "text-slate-400 hover:text-white"
@@ -218,5 +231,13 @@ export default function Home() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div></div>}>
+      <Dashboard />
+    </Suspense>
   );
 }

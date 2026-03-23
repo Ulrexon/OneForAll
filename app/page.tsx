@@ -2,12 +2,36 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon, Search } from "lucide-react";
+import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon, Search, QrCode, Palette, FileText } from "lucide-react";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const tools = [
+    {
+      title: "Text Analyzer",
+      description: "Get real-time word counts, stats, and keyword density from texts.",
+      icon: <FileText className="w-8 h-8 text-orange-400" />,
+      href: "/tools/text-analyzer",
+      color: "from-orange-500/20 to-red-500/0",
+      border: "hover:border-orange-500/50"
+    },
+    {
+      title: "Color Picker",
+      description: "Extract pixel-perfect color palettes directly from your images.",
+      icon: <Palette className="w-8 h-8 text-pink-400" />,
+      href: "/tools/color-picker",
+      color: "from-pink-500/20 to-amber-500/0",
+      border: "hover:border-pink-500/50"
+    },
+    {
+      title: "QR Code Generator",
+      description: "Create customizable, high-resolution QR codes in seconds.",
+      icon: <QrCode className="w-8 h-8 text-blue-400" />,
+      href: "/tools/qr-generator",
+      color: "from-blue-500/20 to-indigo-500/0",
+      border: "hover:border-blue-500/50"
+    },
     {
       title: "Image Converter",
       description: "Convert images seamlessly between WebP, PNG, and JPEG instantly.",

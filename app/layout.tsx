@@ -13,6 +13,9 @@ const interFont = Inter({
 export const metadata: Metadata = {
   title: "AllForWeb Toolkit",
   description: "A modern, premium utility toolkit for everyday developer tasks.",
+  other: {
+    "google-adsense-account": "ca-pub-1141041890300704",
+  },
 };
 
 export default function RootLayout({

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon, Search, QrCode, Palette, FileText, Gamepad2, Hammer, Sliders, Timer } from "lucide-react";
 
 export default function Home() {
@@ -111,11 +112,11 @@ export default function Home() {
   ];
 
   const filteredTools = tools.filter(tool => {
-    const matchesSearch = tool.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          tool.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tool.description.toLowerCase().includes(searchQuery.toLowerCase());
     const toolCat = tool.category || "dev";
     const matchesTab = toolCat === activeTab;
-    
+
     return matchesSearch && matchesTab;
   });
 
@@ -147,22 +148,20 @@ export default function Home() {
       <div className="flex bg-black/50 rounded-xl p-1 border border-white/5 w-fit mx-auto mb-10 z-20 relative">
         <button
           onClick={() => setActiveTab("dev")}
-          className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${
-            activeTab === "dev"
+          className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${activeTab === "dev"
               ? "bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/30 shadow-lg"
               : "text-slate-400 hover:text-white"
-          }`}
+            }`}
         >
           <Hammer className="w-4 h-4 mr-2" />
           Developer Tools
         </button>
         <button
           onClick={() => setActiveTab("focus")}
-          className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${
-            activeTab === "focus"
+          className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${activeTab === "focus"
               ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-lg"
               : "text-slate-400 hover:text-white"
-          }`}
+            }`}
         >
           <Gamepad2 className="w-4 h-4 mr-2" />
           Relax & Focus
@@ -170,15 +169,30 @@ export default function Home() {
       </div>
 
       {filteredTools.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mb-24 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+        <motion.div 
+          key={activeTab + searchQuery} 
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mb-24"
+        >
           {filteredTools.map((tool, index) => (
-            <Link 
-              href={tool.href} 
-              key={index}
-              className={`group relative overflow-hidden rounded-3xl p-8 bg-black/40 border border-white/5 backdrop-blur-sm transition-all duration-500 hover:bg-black/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 ${tool.border}`}
+            <motion.div
+              key={tool.href}
+              variants={{
+                hidden: { opacity: 0, y: 30, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } }
+              }}
             >
+              <Link
+                href={tool.href}
+                className={`group h-full flex flex-col relative overflow-hidden rounded-3xl p-8 bg-black/40 border border-white/5 backdrop-blur-sm transition-all duration-300 hover:bg-black/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 ${tool.border}`}
+              >
               <div className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-              
+
               <div className="relative z-10">
                 <div className="mb-6 p-4 bg-white/5 rounded-2xl w-fit group-hover:scale-110 transition-transform duration-500 shadow-inner">
                   {tool.icon}
@@ -191,17 +205,18 @@ export default function Home() {
                 <ArrowRight className="w-6 h-6" />
               </div>
             </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
-          <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 px-4 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md mt-4">
-            <Search className="w-12 h-12 text-white/20 mx-auto mb-4" />
-            <h3 className="text-xl font-medium text-white/90 mb-2">No tools found</h3>
-            <p className="text-slate-400">
-              We couldn't find any tools matching "{searchQuery}".
-            </p>
-          </div>
-        )}
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 px-4 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md mt-4">
+          <Search className="w-12 h-12 text-white/20 mx-auto mb-4" />
+          <h3 className="text-xl font-medium text-white/90 mb-2">No tools found</h3>
+          <p className="text-slate-400">
+            We couldn't find any tools matching "{searchQuery}".
+          </p>
+        </div>
+      )}
     </div>
   );
 }

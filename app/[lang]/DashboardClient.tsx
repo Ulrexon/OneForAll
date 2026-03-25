@@ -194,36 +194,36 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
       </div>
 
       {/* Tabs */}
-      <div className="flex bg-black/50 rounded-xl p-1 border border-white/5 w-fit mx-auto mb-10 z-20 relative">
+      <div className="flex flex-wrap sm:flex-nowrap justify-center bg-black/50 rounded-2xl p-1.5 sm:p-2 gap-1 sm:gap-2 border border-white/5 w-full sm:w-fit max-w-[95%] mx-auto mb-10 z-20 relative shadow-2xl">
         <button
           onClick={() => handleTabChange("dev")}
-          className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${activeTab === "dev"
+          className={`px-4 py-2.5 sm:px-8 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center flex-grow sm:flex-grow-0 justify-center ${activeTab === "dev"
               ? "bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/30 shadow-lg"
-              : "text-slate-400 hover:text-white"
+              : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
         >
-          <Hammer className="w-4 h-4 mr-2" />
-          {dict.dashboard.tabDev}
+          <Hammer className="w-4 h-4 mr-2 shrink-0" />
+          <span className="whitespace-nowrap">{dict.dashboard.tabDev}</span>
         </button>
         <button
           onClick={() => handleTabChange("calc")}
-          className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${activeTab === "calc"
+          className={`px-4 py-2.5 sm:px-8 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center flex-grow sm:flex-grow-0 justify-center ${activeTab === "calc"
               ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 shadow-lg"
-              : "text-slate-400 hover:text-white"
+              : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
         >
-          <Calculator className="w-4 h-4 mr-2" />
-          {dict.dashboard.tabCalc}
+          <Calculator className="w-4 h-4 mr-2 shrink-0" />
+          <span className="whitespace-nowrap">{dict.dashboard.tabCalc}</span>
         </button>
         <button
           onClick={() => handleTabChange("focus")}
-          className={`px-8 py-3 rounded-lg text-sm font-bold transition-all flex items-center ${activeTab === "focus"
+          className={`px-4 py-2.5 sm:px-8 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center flex-grow sm:flex-grow-0 justify-center ${activeTab === "focus"
               ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-lg"
-              : "text-slate-400 hover:text-white"
+              : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
         >
-          <Gamepad2 className="w-4 h-4 mr-2" />
-          {dict.dashboard.tabFocus}
+          <Gamepad2 className="w-4 h-4 mr-2 shrink-0" />
+          <span className="whitespace-nowrap">{dict.dashboard.tabFocus}</span>
         </button>
       </div>
 
@@ -256,8 +256,8 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
                 <div className="mb-6 p-4 bg-white/5 rounded-2xl w-fit group-hover:scale-110 transition-transform duration-500 shadow-inner">
                   {tool.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 tracking-wide">{tool.title}</h3>
-                <p className="text-slate-400 leading-relaxed text-sm truncate-2-lines">{tool.description}</p>
+                <h3 className="text-xl font-bold text-white mb-3 tracking-wide break-words">{tool.title}</h3>
+                <p className="text-slate-400 leading-relaxed text-sm line-clamp-3">{tool.description}</p>
               </div>
 
               <div className="absolute top-8 right-8 text-white/10 group-hover:text-white/40 transition-colors duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">

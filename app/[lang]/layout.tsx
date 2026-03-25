@@ -35,24 +35,10 @@ export default async function RootLayout({
   const dict = await getDictionary(lang);
 
   return (
-    <html lang={lang} className="dark">
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1141041890300704"
-          crossOrigin="anonymous"
-        ></script>
-      </head>
-      <body
-        className={`${interFont.variable} antialiased text-white min-h-screen relative pb-32`}
-      >
-        <BackgroundAnimation />
-        <DictionaryProvider dictionary={dict}>
-          <main className="relative z-10 p-6 md:p-12 lg:p-24 max-w-7xl mx-auto min-h-screen">
-            {children}
-          </main>
-        </DictionaryProvider>
-      </body>
-    </html>
+    <DictionaryProvider dictionary={dict}>
+      <main className="relative z-10 p-6 md:p-12 lg:p-24 max-w-7xl mx-auto min-h-screen">
+        {children}
+      </main>
+    </DictionaryProvider>
   );
 }

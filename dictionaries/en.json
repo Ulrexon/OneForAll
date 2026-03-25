@@ -45,8 +45,9 @@
       "errors": "Errors",
       "time": "Time",
       "reset": "Reset Test",
-      "prompt": "Type the text below as fast as you can",
-      "complete": "Test Complete!"
+      "prompt": "Type the text above as fast as you can",
+      "complete": "Test Complete!",
+      "words": ["react", "nextjs", "typescript", "javascript", "developer", "function", "variable", "component", "interface", "promise", "async", "await", "return", "import", "export", "class", "object", "array", "string", "number", "boolean", "null", "undefined", "console", "window", "document", "html", "css", "style", "margin", "padding", "border", "flex", "grid", "position", "relative", "absolute", "fixed", "width", "height", "color", "background", "font", "text", "align", "justify", "center", "left", "right", "top", "bottom", "hover", "focus", "link", "button", "input", "form", "database", "server", "client"]
     },
     "colorPicker": {
       "upload": "Upload Image",

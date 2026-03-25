@@ -46,7 +46,8 @@
       "time": "Temps",
       "reset": "Réinitialiser le Test",
       "prompt": "Tapez le texte ci-dessous aussi vite que possible",
-      "complete": "Test Terminé!"
+      "complete": "Test Terminé!",
+      "words": ["react", "nextjs", "typescript", "javascript", "developpeur", "fonction", "variable", "composant", "interface", "promesse", "retour", "importer", "exporter", "classe", "objet", "tableau", "chaine", "nombre", "booleen", "nul", "indefini", "console", "fenetre", "document", "style", "marge", "remplissage", "bordure", "position", "relatif", "absolu", "fixe", "largeur", "hauteur", "couleur", "fond", "police", "texte", "aligner", "justifier", "centre", "gauche", "droite", "haut", "bas", "lien", "bouton", "formulaire", "serveur", "client", "etat", "effet", "contexte", "action", "page", "route", "image"]
     },
     "colorPicker": {
       "upload": "Télécharger l'image",

@@ -5,25 +5,8 @@ import Link from "next/link";
 import { ArrowLeft, Gamepad2, RotateCcw, Timer, Percent, Zap } from "lucide-react";
 import { useDictionary } from "../../DictionaryProvider";
 
-// Expandable Tech/Dev Word Bank
-const WORD_BANK = [
-  "react", "nextjs", "typescript", "javascript", "developer", "function",
-  "variable", "component", "interface", "promise", "async", "await", "return",
-  "import", "export", "class", "object", "array", "string", "number", "boolean",
-  "null", "undefined", "console", "window", "document", "html", "css", "style",
-  "margin", "padding", "border", "flex", "grid", "position", "relative",
-  "absolute", "fixed", "sticky", "width", "height", "color", "background",
-  "font", "text", "align", "justify", "center", "left", "right", "top", "bottom",
-  "hover", "focus", "active", "visited", "link", "button", "input", "form",
-  "database", "server", "client", "node", "express", "api", "rest", "graphql",
-  "query", "mutation", "state", "props", "hook", "effect", "context", "reducer",
-  "action", "payload", "store", "dispatch", "subscribe", "provider", "consumer",
-  "layout", "page", "route", "link", "image", "script", "meta", "head", "body",
-  "div", "span", "paragraph", "heading", "list", "item", "table", "row", "cell"
-];
-
-const generateWords = (count: number) => {
-  return Array.from({ length: count }, () => WORD_BANK[Math.floor(Math.random() * WORD_BANK.length)]).join(" ");
+const generateWords = (count: number, wordBank: string[]) => {
+  return Array.from({ length: count }, () => wordBank[Math.floor(Math.random() * Math.max(1, wordBank?.length || 1))] || "error").join(" ");
 };
 
 const TEST_DURATION = 30; // Seconds
@@ -43,14 +26,15 @@ export default function TypingTest() {
 
   // Initialize test
   const resetTest = useCallback(() => {
-    setText(generateWords(80)); // Generate plenty of words
+    const wordBank = dict.tools.typing.words || ["error"];
+    setText(generateWords(25, wordBank)); // 25 words fits nicely on all screens and represents a typical 30-40s test
     setTyped("");
     setStatus("idle");
     setTimeLeft(TEST_DURATION);
     setWpm(0);
     setAccuracy(0);
     if (inputRef.current) inputRef.current.focus();
-  }, []);
+  }, [dict]);
 
   useEffect(() => {
     resetTest();
@@ -63,41 +47,43 @@ export default function TypingTest() {
       timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
     } else if (timeLeft === 0 && status === "playing") {
       setStatus("finished");
-      calculateResults();
+      calculateResults(typed, 0);
     }
     return () => clearInterval(timer);
   }, [status, timeLeft]);
 
-  const calculateResults = useCallback(() => {
-    // Basic calculation: Words Per Minute = (total correct chars / 5) / time in minutes
+  const calculateResults = useCallback((currentTyped: string, currentTimeLeft: number) => {
     let correctStrokes = 0;
-    for (let i = 0; i < typed.length; i++) {
-      if (typed[i] === text[i]) correctStrokes++;
+    for (let i = 0; i < currentTyped.length; i++) {
+      if (currentTyped[i] === text[i]) correctStrokes++;
     }
 
-    // Each "word" is standardized as 5 characters in WPM tests
-    const grossWpm = (typed.length / 5) / (TEST_DURATION / 60);
-    const netWpm = Math.max(0, (correctStrokes / 5) / (TEST_DURATION / 60));
+    const elapsedSeconds = TEST_DURATION - currentTimeLeft;
+    const timeInMinutes = (elapsedSeconds > 0 ? elapsedSeconds : 1) / 60; // Avoid division by zero
 
-    const acc = typed.length > 0 ? (correctStrokes / typed.length) * 100 : 0;
+    const netWpm = Math.max(0, (correctStrokes / 5) / timeInMinutes);
+    const acc = currentTyped.length > 0 ? (correctStrokes / currentTyped.length) * 100 : 0;
 
     setWpm(Math.round(netWpm));
     setAccuracy(Math.round(acc));
-  }, [typed, text]);
+  }, [text]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (status === "finished") return;
 
     const value = e.target.value;
+    if (value.length > text.length) return; // Ignore input past the final character
+
     setTyped(value);
 
     if (status === "idle" && value.length > 0) {
       setStatus("playing");
     }
 
-    // Automatically extend text if getting close to end
-    if (value.length > text.length - 20) {
-      setText(prev => prev + " " + generateWords(20));
+    // Stop and evaluate immediately if user finishes the entire text block before the timer
+    if (value.length === text.length) {
+      setStatus("finished");
+      calculateResults(value, timeLeft);
     }
   };
 
@@ -211,7 +197,7 @@ export default function TypingTest() {
             />
 
             {/* Text Render */}
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-mono leading-tight sm:leading-relaxed tracking-wide break-words select-none relative z-10 w-full h-full text-left max-h-[250px] sm:max-h-[300px] overflow-hidden">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-mono leading-tight sm:leading-relaxed tracking-wide break-words select-none relative z-10 w-full h-full text-left">
               {status === "finished" ? (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4 sm:space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
                   <h2 className="text-3xl sm:text-5xl font-black text-amber-400 drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">{dict.tools.typing.complete}</h2>

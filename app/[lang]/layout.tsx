@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import BackgroundAnimation from "../components/BackgroundAnimation";
+import Franky from "../components/Franky";
 import DictionaryProvider from "./DictionaryProvider";
 import { getDictionary } from "../../get-dictionary";
 import type { Locale } from "../../i18n-config";

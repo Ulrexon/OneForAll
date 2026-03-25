@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import BackgroundAnimation from "./components/BackgroundAnimation";
+import ScrollToTop from "./components/ScrollToTop";
 
 const interFont = Inter({
   variable: "--font-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${interFont.variable} antialiased text-white min-h-screen relative pb-32`}
       >
+        <ScrollToTop />
         <BackgroundAnimation />
         <main className="relative z-10 p-6 md:p-12 lg:p-24 max-w-7xl mx-auto min-h-screen">
             {children}

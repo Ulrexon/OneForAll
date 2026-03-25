@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon, Search, QrCode, Palette, FileText, Gamepad2, Hammer, Sliders, Timer, Calculator, Clock } from "lucide-react";
+import Franky from "../components/Franky";
 
 export default function DashboardClient({ dict, lang }: { dict: any; lang: string }) {
   const router = useRouter();
@@ -171,6 +172,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh]">
+      <Franky message={dict.dashboard.franky} />
       <div className="text-center mb-10 relative">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 animate-pulse">
           {dict.dashboard.title}
@@ -189,7 +191,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
           placeholder={dict.dashboard.searchPlaceholder}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-14 pr-6 py-4 bg-black/40 border border-white/10 rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all backdrop-blur-md shadow-2xl text-lg hover:bg-black/60"
+          className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-3 sm:py-4 bg-black/40 border border-white/10 rounded-2xl text-white placeholder:text-sm sm:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all backdrop-blur-md shadow-2xl text-base sm:text-lg hover:bg-black/60 truncate"
         />
       </div>
 

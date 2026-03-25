@@ -8,6 +8,7 @@
     "tabFocus": "Relax & Concentración",
     "noToolsTitle": "No se encontraron herramientas",
     "noToolsDesc": "No pudimos encontrar herramientas que coincidan con",
+    "franky": "¡Guau! Soy Franky",
     "tools": {
       "zenPomodoro": { "title": "Pomodoro Zen", "desc": "Aumenta la productividad con temporizadores de trabajo profundo y ruido marrón algorítmico nativo." },
       "typingTest": { "title": "Prueba de Velocidad de Escritura", "desc": "Pon a prueba tu precisión y velocidad de Palabras Por Minuto (PPM)." },

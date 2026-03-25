@@ -8,6 +8,7 @@
     "tabFocus": "Relax & Focus",
     "noToolsTitle": "No tools found",
     "noToolsDesc": "We couldn't find any tools matching",
+    "franky": "Woof! I'm Franky",
     "tools": {
       "zenPomodoro": { "title": "Zen Pomodoro", "desc": "Boost productivity with deep-work timers and native algorithmic brown noise." },
       "typingTest": { "title": "Speed Typing Test", "desc": "Test your Words Per Minute (WPM) accuracy and speed." },

@@ -8,6 +8,7 @@
     "tabFocus": "Détente & Concentration",
     "noToolsTitle": "Aucun outil trouvé",
     "noToolsDesc": "Nous n'avons trouvé aucun outil correspondant à",
+    "franky": "Wouf ! Je suis Franky",
     "tools": {
       "zenPomodoro": { "title": "Pomodoro Zen", "desc": "Augmentez la productivité avec des minuteries de travail profond et un bruit brun algorithmique." },
       "typingTest": { "title": "Test de Vitesse de Frappe", "desc": "Testez votre précision et votre vitesse en Mots Par Minute (MPM)." },

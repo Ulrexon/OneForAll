@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon } from "lucide-react";
+import Franky from "./components/Franky";
 
 export default function Home() {
   const tools = [
@@ -47,6 +48,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh]">
+      <Franky />
       <div className="text-center mb-16 relative">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 animate-pulse">
           AllForWeb

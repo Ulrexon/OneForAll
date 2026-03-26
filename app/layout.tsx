@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import BackgroundAnimation from "./components/BackgroundAnimation";
 import ScrollToTop from "./components/ScrollToTop";
+import BackgroundAnimation from "./components/BackgroundAnimation";
 
 const interFont = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ export default function RootLayout({
       >
         <ScrollToTop />
         <BackgroundAnimation />
-        <main className="relative z-10 p-6 md:p-12 lg:p-24 max-w-7xl mx-auto min-h-screen">
+        <main className="relative z-10 p-6 md:p-12 lg:px-12 lg:pt-6 lg:pb-24 max-w-7xl mx-auto min-h-screen">
             {children}
         </main>
       </body>

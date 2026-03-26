@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useMemo, useDeferredValue } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { Fingerprint, Code, Hash, FileJson, ArrowRight, Image as ImageIcon, Search, QrCode, Palette, FileText, Gamepad2, Hammer, Sliders, Timer, Calculator, Clock } from "lucide-react";
-import Franky from "../components/Franky";
+
+const Franky = dynamic(() => import("../components/Franky"), { ssr: false });
 
 export default function DashboardClient({ dict, lang }: { dict: any; lang: string }) {
   const router = useRouter();
@@ -32,6 +34,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
   }, [tabParam, pathname, router, searchParams]);
 
   const [searchQuery, setSearchQuery] = useState("");
+  const deferredSearchQuery = useDeferredValue(searchQuery);
 
   const handleTabChange = (tab: "dev" | "focus" | "calc") => {
     setActiveTab(tab);
@@ -41,7 +44,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const tools = [
+  const tools = useMemo(() => [
     {
       title: dict.dashboard.tools.zenPomodoro.title,
       description: dict.dashboard.tools.zenPomodoro.desc,
@@ -159,19 +162,21 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
       border: "hover:border-cyan-500/50",
       category: "calc"
     }
-  ];
+  ], [dict, lang]);
 
-  const filteredTools = tools.filter(tool => {
-    const matchesSearch = tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tool.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const toolCat = tool.category || "dev";
-    const matchesTab = toolCat === activeTab;
+  const filteredTools = useMemo(() => {
+    return tools.filter(tool => {
+      const matchesSearch = tool.title.toLowerCase().includes(deferredSearchQuery.toLowerCase()) ||
+        tool.description.toLowerCase().includes(deferredSearchQuery.toLowerCase());
+      const toolCat = tool.category || "dev";
+      const matchesTab = toolCat === activeTab;
 
-    return matchesSearch && matchesTab;
-  });
+      return matchesSearch && matchesTab;
+    });
+  }, [tools, deferredSearchQuery, activeTab]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh]">
+    <div className="flex flex-col items-center justify-start pt-6 md:pt-12 min-h-[80vh]">
       <Franky message={dict.dashboard.franky} />
       <div className="text-center mb-10 relative">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 animate-pulse">
@@ -191,7 +196,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
           placeholder={dict.dashboard.searchPlaceholder}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-3 sm:py-4 bg-black/40 border border-white/10 rounded-2xl text-white placeholder:text-sm sm:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all backdrop-blur-md shadow-2xl text-base sm:text-lg hover:bg-black/60 truncate"
+          className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-3 sm:py-4 bg-black/40 border border-white/10 rounded-2xl text-white placeholder:text-[13px] sm:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all backdrop-blur-md shadow-2xl text-sm sm:text-lg hover:bg-black/60 truncate"
         />
       </div>
 
@@ -199,33 +204,33 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
       <div className="flex flex-wrap sm:flex-nowrap justify-center bg-black/50 rounded-2xl p-1.5 sm:p-2 gap-1 sm:gap-2 border border-white/5 w-full sm:w-fit max-w-[95%] mx-auto mb-10 z-20 relative shadow-2xl">
         <button
           onClick={() => handleTabChange("dev")}
-          className={`px-4 py-2.5 sm:px-8 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center flex-grow sm:flex-grow-0 justify-center ${activeTab === "dev"
+          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full ${activeTab === "dev"
               ? "bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/30 shadow-lg"
               : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
         >
-          <Hammer className="w-4 h-4 mr-2 shrink-0" />
-          <span className="whitespace-nowrap">{dict.dashboard.tabDev}</span>
+          <Hammer className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 shrink-0 mb-1 sm:mb-0" />
+          <span className="text-center leading-tight">{dict.dashboard.tabDev}</span>
         </button>
         <button
           onClick={() => handleTabChange("calc")}
-          className={`px-4 py-2.5 sm:px-8 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center flex-grow sm:flex-grow-0 justify-center ${activeTab === "calc"
+          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full ${activeTab === "calc"
               ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 shadow-lg"
               : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
         >
-          <Calculator className="w-4 h-4 mr-2 shrink-0" />
-          <span className="whitespace-nowrap">{dict.dashboard.tabCalc}</span>
+          <Calculator className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 shrink-0 mb-1 sm:mb-0" />
+          <span className="text-center leading-tight">{dict.dashboard.tabCalc}</span>
         </button>
         <button
           onClick={() => handleTabChange("focus")}
-          className={`px-4 py-2.5 sm:px-8 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center flex-grow sm:flex-grow-0 justify-center ${activeTab === "focus"
+          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full ${activeTab === "focus"
               ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-lg"
               : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
         >
-          <Gamepad2 className="w-4 h-4 mr-2 shrink-0" />
-          <span className="whitespace-nowrap">{dict.dashboard.tabFocus}</span>
+          <Gamepad2 className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 shrink-0 mb-1 sm:mb-0" />
+          <span className="text-center leading-tight">{dict.dashboard.tabFocus}</span>
         </button>
       </div>
 

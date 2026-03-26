@@ -26,7 +26,7 @@ export default function BackgroundAnimation() {
         value: "transparent",
       },
     },
-    fpsLimit: 120,
+    fpsLimit: 60,
     interactivity: {
       events: {
         onHover: {
@@ -68,7 +68,7 @@ export default function BackgroundAnimation() {
           width: 800,
           height: 800,
         },
-        value: 120, // High enough for modern dense network
+        value: 70, // Balanced density for mobile battery performance
       },
       opacity: {
         value: 0.4,
@@ -85,7 +85,7 @@ export default function BackgroundAnimation() {
 
   if (init) {
     return (
-      <div className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-auto">
+      <div className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none md:pointer-events-auto">
          <Particles
             id="tsparticles"
             particlesLoaded={particlesLoaded}

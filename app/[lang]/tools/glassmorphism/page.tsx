@@ -56,9 +56,9 @@ border: 1px solid rgba(${rgbBase}, ${outline});`;
           <ArrowLeft className="w-6 h-6 text-slate-300" />
         </Link>
         <div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 flex items-center text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400">
-            <Sliders className="w-10 h-10 mr-4 text-sky-400" />
-            {dict.dashboard.tools.glassmorphism.title}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 flex items-center flex-wrap gap-2 sm:gap-4 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400">
+            <Sliders className="w-8 h-8 sm:w-10 sm:h-10 text-sky-400 shrink-0" />
+            <span className="leading-tight">{dict.dashboard.tools.glassmorphism.title}</span>
           </h1>
           <p className="text-slate-400 text-lg">
             {dict.dashboard.tools.glassmorphism.desc}

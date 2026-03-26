@@ -41,8 +41,8 @@ export default function UuidGenerator() {
           <ArrowLeft className="w-6 h-6 text-slate-300" />
         </Link>
         <div>
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 flex items-center">
-            {dict.dashboard.tools.uuid.title} <Hash className="ml-3 w-8 h-8 text-amber-400" />
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 flex items-center flex-wrap gap-2 sm:gap-4">
+            <span className="leading-tight">{dict.dashboard.tools.uuid.title}</span> <Hash className="w-8 h-8 text-amber-400 shrink-0" />
           </h1>
           <p className="text-slate-400 mt-2">
             {dict.dashboard.tools.uuid.desc}
@@ -116,7 +116,7 @@ export default function UuidGenerator() {
                           key={idx} 
                           className="flex justify-between items-center group px-4 py-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
                        >
-                          <span className="font-mono text-amber-100 text-sm md:text-base tracking-wider">{uuid}</span>
+                          <span className="font-mono text-amber-100 text-[11px] sm:text-sm md:text-base tracking-widest sm:tracking-wider break-all leading-relaxed mr-2">{uuid}</span>
                           <button
                              onClick={() => copySingle(uuid, idx)}
                              className="text-slate-500 hover:text-amber-400 transition-colors p-2 rounded-lg opacity-0 group-hover:opacity-100 focus:opacity-100"

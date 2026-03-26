@@ -44,7 +44,7 @@ export default function Base64Converter() {
           <ArrowLeft className="w-6 h-6 text-slate-300" />
         </Link>
         <div>
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 leading-tight">
             {dict.dashboard.tools.base64.title}
           </h1>
           <p className="text-slate-400 mt-2">

@@ -60,8 +60,8 @@ export default function JwtDecoder() {
           <ArrowLeft className="w-6 h-6 text-slate-300" />
         </Link>
         <div>
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-400 flex items-center">
-            {dict.dashboard.tools.jwt.title} <KeyRound className="ml-3 w-8 h-8 text-rose-400" />
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-400 flex items-center flex-wrap gap-2 sm:gap-4">
+            <span className="leading-tight">{dict.dashboard.tools.jwt.title}</span> <KeyRound className="w-8 h-8 text-rose-400 shrink-0" />
           </h1>
           <p className="text-slate-400 mt-2">
             {dict.dashboard.tools.jwt.desc}

@@ -204,9 +204,9 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
       <div className="flex flex-wrap sm:flex-nowrap justify-center bg-black/50 rounded-2xl p-1.5 sm:p-2 gap-1 sm:gap-2 border border-white/5 w-full sm:w-fit max-w-[95%] mx-auto mb-10 z-20 relative shadow-2xl">
         <button
           onClick={() => handleTabChange("dev")}
-          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full ${activeTab === "dev"
-              ? "bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/30 shadow-lg"
-              : "text-slate-400 hover:text-white hover:bg-white/5"
+          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "dev"
+              ? "bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/30 shadow-lg shadow-fuchsia-500/20"
+              : "text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10"
             }`}
         >
           <Hammer className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 shrink-0 mb-1 sm:mb-0" />
@@ -214,9 +214,9 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
         </button>
         <button
           onClick={() => handleTabChange("calc")}
-          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full ${activeTab === "calc"
-              ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 shadow-lg"
-              : "text-slate-400 hover:text-white hover:bg-white/5"
+          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "calc"
+              ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 shadow-lg shadow-indigo-500/20"
+              : "text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10"
             }`}
         >
           <Calculator className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 shrink-0 mb-1 sm:mb-0" />
@@ -224,9 +224,9 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
         </button>
         <button
           onClick={() => handleTabChange("focus")}
-          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full ${activeTab === "focus"
-              ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-lg"
-              : "text-slate-400 hover:text-white hover:bg-white/5"
+          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "focus"
+              ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-lg shadow-emerald-500/20"
+              : "text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10"
             }`}
         >
           <Gamepad2 className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 shrink-0 mb-1 sm:mb-0" />
@@ -248,6 +248,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
           {filteredTools.map((tool, index) => (
             <motion.div
               key={tool.href}
+              whileTap={{ scale: 0.94 }}
               variants={{
                 hidden: { opacity: 0, y: 30, scale: 0.95 },
                 visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } }
@@ -255,12 +256,12 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
             >
               <Link
                 href={tool.href}
-                className={`group h-full flex flex-col relative overflow-hidden rounded-3xl p-8 bg-black/40 border border-white/5 backdrop-blur-sm transition-all duration-300 hover:bg-black/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 ${tool.border}`}
+                className={`group h-full flex flex-col relative overflow-hidden rounded-3xl p-8 bg-black/40 border border-white/5 backdrop-blur-sm transition-all duration-500 hover:bg-black/60 active:bg-black/80 shadow-lg hover:shadow-2xl hover:-translate-y-2 active:translate-y-0 active:shadow-md touch-manipulation ${tool.border}`}
               >
-              <div className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              <div className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-500`} />
 
               <div className="relative z-10">
-                <div className="mb-6 p-4 bg-white/5 rounded-2xl w-fit group-hover:scale-110 transition-transform duration-500 shadow-inner">
+                <div className="mb-6 p-4 bg-white/5 rounded-2xl w-fit group-hover:scale-110 group-active:scale-95 transition-transform duration-500 shadow-inner">
                   {tool.icon}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3 tracking-wide break-words">{tool.title}</h3>

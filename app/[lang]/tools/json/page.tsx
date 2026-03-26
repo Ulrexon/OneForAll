@@ -48,7 +48,7 @@ export default function JsonFormatter() {
             <ArrowLeft className="w-6 h-6 text-slate-300" />
           </Link>
           <div>
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-400">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-400 leading-tight">
               {dict.dashboard.tools.json.title}
             </h1>
             <p className="text-slate-400 mt-2">

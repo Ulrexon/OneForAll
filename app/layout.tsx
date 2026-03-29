@@ -11,8 +11,18 @@ const interFont = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://allforweb.com"),
   title: "AllForWeb Toolkit",
   description: "A modern, premium utility toolkit for everyday developer tasks.",
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/en",
+      "es-ES": "/es",
+      "pt-BR": "/pt",
+      "fr-FR": "/fr",
+    },
+  },
   other: {
     "google-adsense-account": "ca-pub-1141041890300704",
   },

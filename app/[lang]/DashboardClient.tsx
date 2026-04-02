@@ -204,7 +204,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
       <div className="flex flex-wrap sm:flex-nowrap justify-center bg-black/50 rounded-2xl p-1.5 sm:p-2 gap-1 sm:gap-2 border border-white/5 w-full sm:w-fit max-w-[95%] mx-auto mb-10 z-20 relative shadow-2xl">
         <button
           onClick={() => handleTabChange("dev")}
-          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "dev"
+          className={`cursor-pointer px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "dev"
               ? "bg-fuchsia-500/20 text-fuchsia-400 border border-fuchsia-500/30 shadow-lg shadow-fuchsia-500/20"
               : "text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10"
             }`}
@@ -214,7 +214,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
         </button>
         <button
           onClick={() => handleTabChange("calc")}
-          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "calc"
+          className={`cursor-pointer px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "calc"
               ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 shadow-lg shadow-indigo-500/20"
               : "text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10"
             }`}
@@ -224,7 +224,7 @@ export default function DashboardClient({ dict, lang }: { dict: any; lang: strin
         </button>
         <button
           onClick={() => handleTabChange("focus")}
-          className={`px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "focus"
+          className={`cursor-pointer px-3 py-3 sm:px-8 sm:py-3 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex flex-col sm:flex-row items-center flex-grow sm:flex-grow-0 justify-center h-full active:scale-90 touch-manipulation ${activeTab === "focus"
               ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-lg shadow-emerald-500/20"
               : "text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10"
             }`}

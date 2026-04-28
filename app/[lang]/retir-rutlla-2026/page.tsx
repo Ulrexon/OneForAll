@@ -193,9 +193,9 @@ export default function RetirRutlla2026Form() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-6 sm:py-12 px-3 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-slate-50 py-0 sm:py-12 px-0 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-10">
+        <div className="text-center mb-8 sm:mb-10 pt-10 sm:pt-0 px-4 sm:px-0">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
             RETIR RUTLLA 2026
           </h1>
@@ -205,15 +205,15 @@ export default function RetirRutlla2026Form() {
         </div>
 
         {status.type && (
-          <div className={`mb-8 p-5 rounded-xl shadow-sm border ${status.type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'}`}>
+          <div className={`mb-8 p-5 mx-4 sm:mx-0 rounded-xl shadow-sm border ${status.type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'}`}>
             <p className="font-medium text-center text-lg">{status.message}</p>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-8 pb-32">
+        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8 pb-32">
           {/* Email y Teléfono de Contacto */}
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-100 transition-all duration-300 hover:shadow-xl">
-            <div className="bg-slate-800 px-6 py-4">
+          <div className="bg-white sm:rounded-2xl shadow-sm sm:shadow-lg overflow-hidden border-y sm:border border-slate-200 sm:border-slate-100 transition-all duration-300 sm:hover:shadow-xl">
+            <div className="bg-slate-800 px-4 sm:px-6 py-4">
               <h2 className="text-xl font-bold text-white flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -252,8 +252,8 @@ export default function RetirRutlla2026Form() {
           </div>
 
           {people.map((person, index) => (
-            <div key={person.id} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-100 transition-all duration-300 hover:shadow-xl">
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-4 flex justify-between items-center">
+            <div key={person.id} className="bg-white sm:rounded-2xl shadow-sm sm:shadow-lg overflow-hidden border-y sm:border border-slate-200 sm:border-slate-100 transition-all duration-300 sm:hover:shadow-xl">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-4 sm:px-6 py-4 flex justify-between items-center">
                 <h2 className="text-xl font-bold text-white flex items-center">
                   <span className="bg-white/20 rounded-full w-8 h-8 flex items-center justify-center mr-3 shadow-inner">
                     {index + 1}
@@ -368,20 +368,20 @@ export default function RetirRutlla2026Form() {
             </div>
           ))}
 
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-8 px-4 sm:px-0">
             <button
               type="button"
               onClick={handleAddPerson}
-              className="flex items-center px-8 py-4 border-2 border-dashed border-blue-400 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:border-blue-500 rounded-2xl font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-sm"
+              className="flex items-center justify-center w-full sm:w-auto px-8 py-4 border-2 border-dashed border-blue-400 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:border-blue-500 rounded-xl sm:rounded-2xl font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-sm"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
-              + Añadir otra persona
+              Añadir otra persona
             </button>
           </div>
 
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-10 px-4 sm:px-0">
             <button
               type="submit"
               disabled={isSubmitting || status.type === 'success'}

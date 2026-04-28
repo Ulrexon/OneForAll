@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 type Person = {
   id: string;
@@ -45,6 +45,25 @@ export default function RetirRutlla2026Form() {
   const [telefono, setTelefono] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const handleFocusIn = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+        setIsKeyboardOpen(true);
+      }
+    };
+    const handleFocusOut = () => {
+      setIsKeyboardOpen(false);
+    };
+    window.addEventListener('focusin', handleFocusIn);
+    window.addEventListener('focusout', handleFocusOut);
+    return () => {
+      window.removeEventListener('focusin', handleFocusIn);
+      window.removeEventListener('focusout', handleFocusOut);
+    };
+  }, []);
 
   const calculateTotal = useMemo(() => {
     return people.reduce((acc, person) => {
@@ -174,7 +193,7 @@ export default function RetirRutlla2026Form() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-slate-50 py-6 sm:py-12 px-3 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
@@ -202,7 +221,7 @@ export default function RetirRutlla2026Form() {
                 Datos de Contacto
               </h2>
             </div>
-            <div className="p-6 sm:p-8">
+            <div className="p-4 sm:p-8">
               <p className="text-sm text-slate-500 mb-6">A este correo te enviaremos el resumen de la inscripción con todos los detalles y el importe total que debes abonar. Usaremos el teléfono en caso de incidencia.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -255,7 +274,7 @@ export default function RetirRutlla2026Form() {
                 )}
               </div>
 
-              <div className="p-6 sm:p-8 space-y-8">
+              <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">NOM / NOMBRE <span className="text-red-500">*</span></label>
@@ -386,7 +405,7 @@ export default function RetirRutlla2026Form() {
         </form>
 
         {/* Floating Total Price Bar */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.1)] p-4 sm:p-6 z-50">
+        <div className={`fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.1)] p-4 sm:p-6 z-50 transition-transform duration-300 ${isKeyboardOpen ? 'translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}>
           <div className="max-w-3xl mx-auto flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="bg-blue-100 text-blue-800 p-3 rounded-xl hidden sm:block">

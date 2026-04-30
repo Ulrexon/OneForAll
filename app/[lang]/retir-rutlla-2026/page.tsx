@@ -259,7 +259,7 @@ export default function RetirRutlla2026Form() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-0 sm:py-12 px-0 sm:px-6 lg:px-8 font-sans selection:bg-blue-100">
+    <div className="fixed inset-0 z-[100] overflow-y-auto min-h-screen bg-slate-50 py-0 sm:py-12 px-0 sm:px-6 lg:px-8 font-sans selection:bg-blue-100">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10 pt-12 sm:pt-0 px-4 sm:px-0">
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5">

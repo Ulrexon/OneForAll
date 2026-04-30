@@ -198,7 +198,7 @@ export default function RetirRutlla2026Form() {
         body: JSON.stringify(payload)
       });
 
-      setStatus({ type: 'success', message: 'Inscripció enviada correctament! Revisa el total a pagar a la part inferior. / ¡Inscripción enviada correctamente! Revisa el total a pagar en la parte inferior.' });
+      setStatus({ type: 'success', message: 'Inscripció enviada correctament! T\'hem enviat un correu amb tota la informació. Revisa el total a pagar a la part inferior. / ¡Inscripción enviada correctamente! Te hemos enviado un correo con toda la información. Revisa el total a pagar en la parte inferior.' });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error(error);

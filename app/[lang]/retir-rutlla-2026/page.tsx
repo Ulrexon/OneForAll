@@ -43,6 +43,8 @@ export default function RetirRutlla2026Form() {
 
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
+  const [formaPago, setFormaPago] = useState('');
+  const [modalidadPago, setModalidadPago] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
@@ -138,6 +140,20 @@ export default function RetirRutlla2026Form() {
       return;
     }
 
+    if (!formaPago) {
+      setStatus({ type: 'error', message: 'Por favor, selecciona una forma de pago.' });
+      setIsSubmitting(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (!modalidadPago) {
+      setStatus({ type: 'error', message: 'Por favor, selecciona una modalidad de pago.' });
+      setIsSubmitting(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     // Validar que todas las personas tengan nombre, apellidos y categoría
     const isValid = people.every(p => p.nombre.trim() !== '' && p.apellidos.trim() !== '' && p.categoria !== '');
     if (!isValid) {
@@ -149,6 +165,8 @@ export default function RetirRutlla2026Form() {
 
     const payload = {
       emailContacto: email.trim(),
+      formaPago,
+      modalidadPago,
       people: people.map(p => {
         let personTotal = 0;
         const cat = CATEGORIES.find(c => c.label === p.categoria);
@@ -381,6 +399,75 @@ export default function RetirRutlla2026Form() {
             </button>
           </div>
 
+          {/* Información de Pago */}
+          <div className="bg-white sm:rounded-2xl shadow-sm sm:shadow-lg overflow-hidden border-y sm:border border-slate-200 sm:border-slate-100 transition-all duration-300 sm:hover:shadow-xl mt-8">
+            <div className="bg-slate-800 px-4 sm:px-6 py-4">
+              <h2 className="text-xl font-bold text-white flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                Información de Pago
+              </h2>
+            </div>
+            <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-3">FORMA DE PAGO <span className="text-red-500">*</span></label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {['Transferencia', 'Efectivo', 'Tarjeta'].map((fp, i) => (
+                    <label key={i} className={`flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all ${formaPago === fp ? 'bg-blue-50 border-blue-500 shadow-sm' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50'}`}>
+                      <input
+                        type="radio"
+                        name="formaPago"
+                        value={fp}
+                        checked={formaPago === fp}
+                        onChange={(e) => setFormaPago(e.target.value)}
+                        className="sr-only"
+                        required
+                      />
+                      <span className={`font-medium ${formaPago === fp ? 'text-blue-700' : 'text-slate-700'}`}>{fp}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-3">MODALIDAD DE PAGO <span className="text-red-500">*</span></label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {['Pago directo', '6 plazos'].map((mp, i) => (
+                    <label key={i} className={`flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all ${modalidadPago === mp ? 'bg-blue-50 border-blue-500 shadow-sm' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50'}`}>
+                      <input
+                        type="radio"
+                        name="modalidadPago"
+                        value={mp}
+                        checked={modalidadPago === mp}
+                        onChange={(e) => setModalidadPago(e.target.value)}
+                        className="sr-only"
+                        required
+                      />
+                      <span className={`font-medium ${modalidadPago === mp ? 'text-blue-700' : 'text-slate-700'}`}>{mp}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-100 rounded-xl p-5 mt-6">
+                <h3 className="text-blue-800 font-bold mb-2 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                  Información Importante
+                </h3>
+                <p className="text-sm text-blue-900 mb-3">
+                  Se podrá pagar el Retiro en completo, hasta 6 pagos mensuales o en efectivo en un sobre durante la ofrenda.
+                </p>
+                <ul className="text-sm text-blue-800 space-y-2 list-disc pl-5">
+                  <li>Si el pago es por <strong>transferencia</strong>, se tiene que poner de concepto: <span className="font-bold bg-blue-200 px-1.5 py-0.5 rounded">Retir2026</span></li>
+                  <li>Si el pago es en <strong>efectivo</strong>, se tendrá que indicar en el sobre: <span className="font-bold bg-blue-200 px-1.5 py-0.5 rounded">Nombre y Apellido y Retir2026</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
           <div className="flex justify-center mt-10 px-4 sm:px-0">
             <button
               type="submit"
@@ -419,6 +506,11 @@ export default function RetirRutlla2026Form() {
                   <p className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">{calculateTotal}</p>
                   <span className="text-2xl font-bold text-slate-600">€</span>
                 </div>
+                {modalidadPago === '6 plazos' && calculateTotal > 0 && (
+                  <p className="text-sm font-medium text-indigo-600 mt-1">
+                    (Son 6 plazos de {(calculateTotal / 6).toFixed(2)}€)
+                  </p>
+                )}
               </div>
             </div>
             

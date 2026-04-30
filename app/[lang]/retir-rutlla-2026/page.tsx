@@ -127,28 +127,28 @@ export default function RetirRutlla2026Form() {
     setStatus({ type: null, message: '' });
 
     if (!email.trim() || !email.includes('@')) {
-      setStatus({ type: 'error', message: 'Por favor, introduce un correo electrónico válido de contacto.' });
+      setStatus({ type: 'error', message: 'Si us plau, introdueix un correu electrònic vàlid. / Por favor, introduce un correo electrónico válido de contacto.' });
       setIsSubmitting(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (!telefono.trim()) {
-      setStatus({ type: 'error', message: 'Por favor, introduce un teléfono de contacto.' });
+      setStatus({ type: 'error', message: 'Si us plau, introdueix un telèfon de contacte. / Por favor, introduce un teléfono de contacto.' });
       setIsSubmitting(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (!formaPago) {
-      setStatus({ type: 'error', message: 'Por favor, selecciona una forma de pago.' });
+      setStatus({ type: 'error', message: 'Si us plau, selecciona una forma de pagament. / Por favor, selecciona una forma de pago.' });
       setIsSubmitting(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (!modalidadPago) {
-      setStatus({ type: 'error', message: 'Por favor, selecciona una modalidad de pago.' });
+      setStatus({ type: 'error', message: 'Si us plau, selecciona una modalitat de pagament. / Por favor, selecciona una modalidad de pago.' });
       setIsSubmitting(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -157,7 +157,7 @@ export default function RetirRutlla2026Form() {
     // Validar que todas las personas tengan nombre, apellidos y categoría
     const isValid = people.every(p => p.nombre.trim() !== '' && p.apellidos.trim() !== '' && p.categoria !== '');
     if (!isValid) {
-      setStatus({ type: 'error', message: 'Por favor, rellena los campos obligatorios (Nombre, Apellidos y Categoría) para todos los asistentes.' });
+      setStatus({ type: 'error', message: 'Si us plau, omple els camps obligatoris (Nom, Cognoms i Categoria) per a tots els assistents. / Por favor, rellena los campos obligatorios (Nombre, Apellidos y Categoría) para todos los asistentes.' });
       setIsSubmitting(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -200,11 +200,11 @@ export default function RetirRutlla2026Form() {
       });
 
       // El usuario pidió explícitamente no borrar los datos para que siga viendo el precio final.
-      setStatus({ type: 'success', message: '¡Inscripción enviada correctamente! Revisa el total a pagar en la parte inferior. Puedes hacer una captura de pantalla si lo deseas.' });
+      setStatus({ type: 'success', message: 'Inscripció enviada correctament! Revisa el total a pagar a la part inferior. / ¡Inscripción enviada correctamente! Revisa el total a pagar en la parte inferior.' });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error(error);
-      setStatus({ type: 'error', message: 'Error al enviar la inscripción. Por favor, revisa tu conexión e inténtalo de nuevo.' });
+      setStatus({ type: 'error', message: 'Error a l\'enviar la inscripció. / Error al enviar la inscripción. Por favor, revisa tu conexión e inténtalo de nuevo.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -218,7 +218,7 @@ export default function RetirRutlla2026Form() {
             RETIR RUTLLA 2026
           </h1>
           <p className="text-lg text-slate-600 bg-white inline-block px-6 py-2 rounded-full shadow-sm border border-slate-100">
-            Formulario de inscripción oficial
+            Formulari d'inscripció oficial / Formulario de inscripción oficial
           </p>
         </div>
 
@@ -236,11 +236,11 @@ export default function RetirRutlla2026Form() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                Datos de Contacto
+                Dades de Contacte / Datos de Contacto
               </h2>
             </div>
             <div className="p-4 sm:p-8">
-              <p className="text-sm text-slate-500 mb-6">A este correo te enviaremos el resumen de la inscripción con todos los detalles y el importe total que debes abonar. Usaremos el teléfono en caso de incidencia.</p>
+              <p className="text-sm text-slate-500 mb-6">A aquest correu t'enviarem el resum de la inscripció. Utilitzarem el telèfon en cas d'incidència. / A este correo te enviaremos el resumen de la inscripción con todos los detalles y el importe total que debes abonar. Usaremos el teléfono en caso de incidencia.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -251,7 +251,7 @@ export default function RetirRutlla2026Form() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-slate-50 hover:bg-white text-slate-900"
-                    placeholder="Ej. correo@ejemplo.com"
+                    placeholder="Ex. correu@exemple.com / Ej. correo@ejemplo.com"
                   />
                 </div>
                 <div>
@@ -262,7 +262,7 @@ export default function RetirRutlla2026Form() {
                     value={telefono}
                     onChange={(e) => setTelefono(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-slate-50 hover:bg-white text-slate-900"
-                    placeholder="Ej. 600123456"
+                    placeholder="Ex. 600123456 / Ej. 600123456"
                   />
                 </div>
               </div>
@@ -276,14 +276,14 @@ export default function RetirRutlla2026Form() {
                   <span className="bg-white/20 rounded-full w-8 h-8 flex items-center justify-center mr-3 shadow-inner">
                     {index + 1}
                   </span>
-                  Asistente
+                  Assistent / Asistente
                 </h2>
                 {index > 0 && (
                   <button
                     type="button"
                     onClick={() => handleRemovePerson(person.id)}
                     className="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
-                    title="Eliminar asistente"
+                    title="Eliminar assistent / Eliminar asistente"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -302,7 +302,7 @@ export default function RetirRutlla2026Form() {
                       value={person.nombre}
                       onChange={(e) => handleChange(person.id, 'nombre', e.target.value)}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-slate-50 hover:bg-white text-slate-900"
-                      placeholder="Ej. Juan"
+                      placeholder="Ex. Joan / Ej. Juan"
                     />
                   </div>
                   <div>
@@ -313,13 +313,13 @@ export default function RetirRutlla2026Form() {
                       value={person.apellidos}
                       onChange={(e) => handleChange(person.id, 'apellidos', e.target.value)}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-slate-50 hover:bg-white text-slate-900"
-                      placeholder="Ej. Pérez"
+                      placeholder="Ex. Pérez / Ej. Pérez"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-3">CATEGORIA PENSIÓ COMPLERTA <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-3">CATEGORIA PENSIÓ COMPLETA / CATEGORÍA PENSIÓN COMPLETA <span className="text-red-500">*</span></label>
                   <div className="space-y-3">
                     {CATEGORIES.map((cat, i) => (
                       <label key={i} className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${person.categoria === cat.label ? 'bg-blue-50 border-blue-500 shadow-sm' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50'}`}>
@@ -339,7 +339,7 @@ export default function RetirRutlla2026Form() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-3">OPCIONAL (Solo una opción)</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-3">OPCIONAL (Només una opció / Solo una opción)</label>
                   <div className="space-y-3">
                     {OPTIONALS.map((opt, i) => (
                       <label key={i} className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${person.opcional.includes(opt.label) ? 'bg-indigo-50 border-indigo-300 shadow-sm' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50'}`}>
@@ -373,13 +373,13 @@ export default function RetirRutlla2026Form() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">EN CAS D'AL.LÈRGIES O INTOLERÀNCIES, QUINES SÓN? (Opcional)</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">EN CAS D'AL·LÈRGIES O INTOLERÀNCIES, QUINES SÓN? / EN CASO DE ALERGIAS O INTOLERANCIAS, ¿CUÁLES SON? (Opcional)</label>
                   <textarea
                     value={person.detalles}
                     onChange={(e) => handleChange(person.id, 'detalles', e.target.value)}
                     rows={3}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-slate-50 hover:bg-white text-slate-900 resize-none"
-                    placeholder="Escribe aquí los detalles..."
+                    placeholder="Escriu aquí els detalls... / Escribe aquí los detalles..."
                   />
                 </div>
               </div>
@@ -395,7 +395,7 @@ export default function RetirRutlla2026Form() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
-              Añadir otra persona
+              Afegir una altra persona / Añadir otra persona
             </button>
           </div>
 
@@ -406,45 +406,52 @@ export default function RetirRutlla2026Form() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
-                Información de Pago
+                Informació de Pagament / Información de Pago
               </h2>
             </div>
             <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-3">FORMA DE PAGO <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700 mb-3">FORMA DE PAGAMENT / FORMA DE PAGO <span className="text-red-500">*</span></label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {['Transferencia', 'Efectivo', 'Tarjeta'].map((fp, i) => (
-                    <label key={i} className={`flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all ${formaPago === fp ? 'bg-blue-50 border-blue-500 shadow-sm' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50'}`}>
+                  {[
+                    { value: 'Transferencia', label: 'Transferència / Transferencia' },
+                    { value: 'Efectivo', label: 'Efectiu / Efectivo' },
+                    { value: 'Tarjeta', label: 'Targeta / Tarjeta' }
+                  ].map((fp, i) => (
+                    <label key={i} className={`flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all ${formaPago === fp.value ? 'bg-blue-50 border-blue-500 shadow-sm' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50'}`}>
                       <input
                         type="radio"
                         name="formaPago"
-                        value={fp}
-                        checked={formaPago === fp}
+                        value={fp.value}
+                        checked={formaPago === fp.value}
                         onChange={(e) => setFormaPago(e.target.value)}
                         className="sr-only"
                         required
                       />
-                      <span className={`font-medium ${formaPago === fp ? 'text-blue-700' : 'text-slate-700'}`}>{fp}</span>
+                      <span className={`font-medium ${formaPago === fp.value ? 'text-blue-700' : 'text-slate-700'}`}>{fp.label}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-3">MODALIDAD DE PAGO <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700 mb-3">MODALITAT DE PAGAMENT / MODALIDAD DE PAGO <span className="text-red-500">*</span></label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {['Pago directo', '6 plazos'].map((mp, i) => (
-                    <label key={i} className={`flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all ${modalidadPago === mp ? 'bg-blue-50 border-blue-500 shadow-sm' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50'}`}>
+                  {[
+                    { value: 'Pago directo', label: 'Pagament directe / Pago directo' },
+                    { value: '6 plazos', label: '6 terminis / 6 plazos' }
+                  ].map((mp, i) => (
+                    <label key={i} className={`flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all ${modalidadPago === mp.value ? 'bg-blue-50 border-blue-500 shadow-sm' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50'}`}>
                       <input
                         type="radio"
                         name="modalidadPago"
-                        value={mp}
-                        checked={modalidadPago === mp}
+                        value={mp.value}
+                        checked={modalidadPago === mp.value}
                         onChange={(e) => setModalidadPago(e.target.value)}
                         className="sr-only"
                         required
                       />
-                      <span className={`font-medium ${modalidadPago === mp ? 'text-blue-700' : 'text-slate-700'}`}>{mp}</span>
+                      <span className={`font-medium ${modalidadPago === mp.value ? 'text-blue-700' : 'text-slate-700'}`}>{mp.label}</span>
                     </label>
                   ))}
                 </div>
@@ -455,14 +462,14 @@ export default function RetirRutlla2026Form() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
-                  Información Importante
+                  Informació Important / Información Importante
                 </h3>
                 <p className="text-sm text-blue-900 mb-3">
-                  Se podrá pagar el Retiro en completo, hasta 6 pagos mensuales o en efectivo en un sobre durante la ofrenda.
+                  Es podrà pagar el Retir al complet, en fins a 6 pagaments mensuals o en efectiu en un sobre durant l'ofrena. / Se podrá pagar el Retiro en completo, hasta 6 pagos mensuales o en efectivo en un sobre durante la ofrenda.
                 </p>
                 <ul className="text-sm text-blue-800 space-y-2 list-disc pl-5">
-                  <li>Si el pago es por <strong>transferencia</strong>, se tiene que poner de concepto: <span className="font-bold bg-blue-200 px-1.5 py-0.5 rounded">Retir2026</span></li>
-                  <li>Si el pago es en <strong>efectivo</strong>, se tendrá que indicar en el sobre: <span className="font-bold bg-blue-200 px-1.5 py-0.5 rounded">Nombre y Apellido y Retir2026</span></li>
+                  <li>Si el pagament és per <strong>transferència</strong>, s'ha de posar de concepte: / Si el pago es por <strong>transferencia</strong>, se tiene que poner de concepto: <span className="font-bold bg-blue-200 px-1.5 py-0.5 rounded">Retir2026</span></li>
+                  <li>Si el pagament és en <strong>efectiu</strong>, s'haurà d'indicar al sobre: / Si el pago es en <strong>efectivo</strong>, se tendrá que indicar en el sobre: <span className="font-bold bg-blue-200 px-1.5 py-0.5 rounded">Nom i Cognom / Nombre y Apellido y Retir2026</span></li>
                 </ul>
               </div>
             </div>
@@ -480,12 +487,12 @@ export default function RetirRutlla2026Form() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Enviando...
+                  Enviant... / Enviando...
                 </span>
               ) : status.type === 'success' ? (
-                'Inscripción Enviada'
+                'Inscripció Enviada / Inscripción Enviada'
               ) : (
-                'Enviar Inscripción'
+                'Enviar Inscripció / Enviar Inscripción'
               )}
             </button>
           </div>
@@ -508,7 +515,7 @@ export default function RetirRutlla2026Form() {
                 </div>
                 {modalidadPago === '6 plazos' && calculateTotal > 0 && (
                   <p className="text-sm font-medium text-indigo-600 mt-1">
-                    (Son 6 plazos de {(calculateTotal / 6).toFixed(2)}€)
+                    (Són 6 terminis de / Son 6 plazos de {(calculateTotal / 6).toFixed(2)}€)
                   </p>
                 )}
               </div>
@@ -519,7 +526,7 @@ export default function RetirRutlla2026Form() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                ¡Completado!
+                Completat! / ¡Completado!
               </div>
             )}
           </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from 'react';
-
+import Image from 'next/image';
+import logoImg from './logo.png';
 type Person = {
   id: string;
   nombre: string;
@@ -262,6 +263,14 @@ export default function RetirRutlla2026Form() {
     <div className="fixed inset-0 z-[100] overflow-y-auto min-h-screen bg-slate-50 py-0 sm:py-12 px-0 sm:px-6 lg:px-8 font-sans selection:bg-blue-100">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10 pt-12 sm:pt-0 px-4 sm:px-0">
+          <div className="flex justify-center mb-6">
+            <Image 
+              src={logoImg} 
+              alt="Logo Retir Rutlla" 
+              className="w-32 sm:w-40 h-auto object-contain drop-shadow-md" 
+              priority 
+            />
+          </div>
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5">
             RETIR RUTLLA 2026
           </h1>
@@ -595,8 +604,8 @@ export default function RetirRutlla2026Form() {
                     <li className="flex items-start">
                       <div className="flex-shrink-0 w-2 h-2 rounded-full bg-blue-500 mt-2 mr-4 shadow-sm"></div>
                       <div>
-                        <p className="font-semibold text-slate-800">Si el pagament és per <span className="text-blue-700">transferència</span>, s'ha de posar de concepte: <span className="font-bold bg-blue-200/80 px-2.5 py-1 rounded-lg text-blue-900 ml-1 shadow-sm border border-blue-200">Retir2026</span></p>
-                        <p className="text-sm font-medium text-slate-600 mt-1.5">Si el pago es por <span className="text-blue-600/80">transferencia</span>, se tiene que poner de concepto: <span className="font-semibold bg-blue-200/50 px-2 py-0.5 rounded-md ml-1 text-blue-900/80 border border-blue-200/50">Retir2026</span></p>
+                        <p className="font-semibold text-slate-800">Si el pagament és per <span className="text-blue-700">transferència</span>, l'IBAN és <span className="font-mono font-bold bg-slate-100 px-2.5 py-1 rounded-lg text-slate-800 mx-1 shadow-sm border border-slate-200 select-all">ES49 0049 7594 5928 1001 1582</span> i s'ha de posar de concepte: <span className="font-bold bg-blue-200/80 px-2.5 py-1 rounded-lg text-blue-900 ml-1 shadow-sm border border-blue-200">Retir2026</span></p>
+                        <p className="text-sm font-medium text-slate-600 mt-1.5">Si el pago es por <span className="text-blue-600/80">transferencia</span>, el IBAN es <span className="font-mono font-bold bg-slate-100/80 px-2 py-0.5 rounded-md mx-1 text-slate-700 border border-slate-200/80 select-all">ES49 0049 7594 5928 1001 1582</span> y se tiene que poner de concepto: <span className="font-semibold bg-blue-200/50 px-2 py-0.5 rounded-md ml-1 text-blue-900/80 border border-blue-200/50">Retir2026</span></p>
                       </div>
                     </li>
                     <li className="flex items-start">

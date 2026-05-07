@@ -15,7 +15,7 @@ type Person = {
 
 const CATEGORIES = [
   { label: 'ADULT/ADULTO +12. COST 100€', value: 100 },
-  { label: 'INFANT 0-12. COST 60€', value: 60 }
+  { label: 'INFANT 3-12. COST 60€', value: 60 }
 ];
 
 const OPTIONALS = [
@@ -218,10 +218,10 @@ export default function RetirRutlla2026Form() {
         </div>
       );
     }
-    if (label === 'INFANT 0-12. COST 60€') {
+    if (label === 'INFANT 3-12. COST 60€') {
       return (
         <div className="flex flex-col">
-          <span className="font-bold text-slate-800 text-sm sm:text-base">INFANT <span className="text-slate-500 font-normal text-xs sm:text-sm">/ INFANTIL (0-12)</span></span>
+          <span className="font-bold text-slate-800 text-sm sm:text-base">INFANT <span className="text-slate-500 font-normal text-xs sm:text-sm">/ INFANTIL (3-12)</span></span>
           <span className="text-sm font-semibold text-blue-600 mt-1">60€</span>
         </div>
       );
@@ -563,7 +563,7 @@ export default function RetirRutlla2026Form() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
                     { value: 'Pago directo', ca: 'Pagament directe', es: 'Pago directo' },
-                    { value: '6 plazos', ca: '6 terminis', es: '6 plazos' }
+                    { value: '6 plazos', ca: '6 terminis (maig a octubre)', es: '6 plazos (mayo a octubre)' }
                   ].map((mp, i) => (
                     <label key={i} className={`flex items-center justify-center p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${modalidadPago === mp.value ? 'bg-green-50/80 border-green-500 shadow-md ring-1 ring-green-500' : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm'}`}>
                       <input
@@ -596,8 +596,13 @@ export default function RetirRutlla2026Form() {
                 </h3>
                 <div className="text-blue-900 space-y-5">
                   <div className="bg-white/60 p-5 rounded-2xl border border-white shadow-sm">
-                    <p className="font-semibold text-slate-800">Es podrà pagar el Retir al complet, en fins a 6 pagaments mensuals o en efectiu en un sobre durant l'ofrena.</p>
-                    <p className="text-sm font-medium text-slate-600 mt-1.5">Se podrá pagar el Retiro al completo, en hasta 6 pagos mensuales o en efectivo en un sobre durante la ofrenda.</p>
+                    <p className="font-semibold text-slate-800">Es podrà pagar el Retir al complet, fins a 6 pagaments mensuals (de maig a octubre) o en efectiu en un sobre durant l'ofrena.</p>
+                    <p className="text-sm font-medium text-slate-600 mt-1.5">Se podrá pagar el Retiro al completo, en hasta 6 pagos mensuales (de mayo a octubre) o en efectivo en un sobre durante la ofrenda.</p>
+                    
+                    <div className="mt-4 pt-4 border-t border-slate-200/60">
+                      <p className="font-bold text-slate-800"><span className="text-rose-600">⚠️ Nota sobre els terminis:</span> En cas d'escollir l'opció de 6 terminis (de maig a octubre), si no es paga cada mes s'haurà d'abonar al complet abans de l'octubre.</p>
+                      <p className="text-sm font-medium text-slate-600 mt-1.5"><span className="text-rose-500 font-bold">Nota sobre los plazos:</span> En caso de elegir la opción de 6 plazos (de mayo a octubre), si no se paga cada mes se deberá abonar al completo antes de octubre.</p>
+                    </div>
                   </div>
                   
                   <ul className="space-y-4 pl-2">
@@ -669,9 +674,9 @@ export default function RetirRutlla2026Form() {
                 </div>
                 {modalidadPago === '6 plazos' && calculateTotal > 0 && (
                   <p className="text-xs sm:text-sm font-semibold text-indigo-600 mt-1 bg-indigo-50 inline-block px-2.5 py-1 rounded-md">
-                    <span className="block sm:inline">6 terminis de {(calculateTotal / 6).toFixed(2)}€</span>
+                    <span className="block sm:inline">6 terminis (maig a octubre) de {(calculateTotal / 6).toFixed(2)}€</span>
                     <span className="hidden sm:inline mx-1.5 text-indigo-300">|</span>
-                    <span className="block sm:inline text-indigo-600/70 mt-0.5 sm:mt-0">6 plazos de {(calculateTotal / 6).toFixed(2)}€</span>
+                    <span className="block sm:inline text-indigo-600/70 mt-0.5 sm:mt-0">6 plazos (mayo a octubre) de {(calculateTotal / 6).toFixed(2)}€</span>
                   </p>
                 )}
               </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import logoImg from './logo.png';
 type Person = {
@@ -33,8 +33,9 @@ const OTHERS = [
 ];
 
 export default function RetirRutlla2026Form() {
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [people, setPeople] = useState<Person[]>([{
-    id: Math.random().toString(36).substring(2, 9),
+    id: '1',
     nombre: '',
     apellidos: '',
     categoria: '',
@@ -133,28 +134,28 @@ export default function RetirRutlla2026Form() {
     if (!email.trim() || !email.includes('@')) {
       setStatus({ type: 'error', message: 'Si us plau, introdueix un correu electrònic vàlid. / Por favor, introduce un correo electrónico válido de contacto.' });
       setIsSubmitting(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
       return;
     }
 
     if (!telefono.trim()) {
       setStatus({ type: 'error', message: 'Si us plau, introdueix un telèfon de contacte. / Por favor, introduce un teléfono de contacto.' });
       setIsSubmitting(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
       return;
     }
 
     if (!formaPago) {
       setStatus({ type: 'error', message: 'Si us plau, selecciona una forma de pagament. / Por favor, selecciona una forma de pago.' });
       setIsSubmitting(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
       return;
     }
 
     if (!modalidadPago) {
       setStatus({ type: 'error', message: 'Si us plau, selecciona una modalitat de pagament. / Por favor, selecciona una modalidad de pago.' });
       setIsSubmitting(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
       return;
     }
 
@@ -162,7 +163,7 @@ export default function RetirRutlla2026Form() {
     if (!isValid) {
       setStatus({ type: 'error', message: 'Si us plau, omple els camps obligatoris (Nom, Cognoms, Categoria i Transport) per a tots els assistents. / Por favor, rellena los campos obligatorios (Nombre, Apellidos, Categoría y Transporte) para todos los asistentes.' });
       setIsSubmitting(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
       return;
     }
 
@@ -187,7 +188,7 @@ export default function RetirRutlla2026Form() {
           opcional: p.opcional,
           altres: p.altres,
           detalles: p.detalles,
-          Transporte: p.transporte,
+          transporte: p.transporte,
           precioPersona: personTotal
         };
       })
@@ -204,10 +205,11 @@ export default function RetirRutlla2026Form() {
       });
 
       setStatus({ type: 'success', message: 'Inscripció enviada correctament! T\'hem enviat un correu amb tota la informació. Revisa el total a pagar a la part inferior. / ¡Inscripción enviada correctamente! Te hemos enviado un correo con toda la información. Revisa el total a pagar en la parte inferior.' });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
     } catch (error) {
       console.error(error);
       setStatus({ type: 'error', message: 'Error a l\'enviar la inscripció. / Error al enviar la inscripción. Por favor, revisa tu conexión e inténtalo de nuevo.' });
+      setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
     } finally {
       setIsSubmitting(false);
     }
@@ -264,25 +266,25 @@ export default function RetirRutlla2026Form() {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] overflow-y-auto min-h-screen bg-slate-50 py-0 sm:py-12 px-0 sm:px-6 lg:px-8 font-sans selection:bg-blue-100">
+    <div ref={scrollRef} className="fixed inset-0 z-[100] overflow-y-auto min-h-screen bg-slate-50 py-0 sm:py-12 px-0 sm:px-6 lg:px-8 font-sans selection:bg-blue-100">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10 pt-12 sm:pt-0 px-4 sm:px-0">
           <div className="flex justify-center mb-6">
-            <Image 
-              src={logoImg} 
-              alt="Logo Retir Rutlla" 
-              className="w-32 sm:w-40 h-auto object-contain drop-shadow-md" 
-              priority 
+            <Image
+              src={logoImg}
+              alt="Logo Retir Rutlla"
+              className="w-32 sm:w-40 h-auto object-contain drop-shadow-md"
+              priority
             />
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5">
             RETIR RUTLLA 2026
           </h1>
           <div className="flex justify-center">
-            <div className="text-slate-600 bg-white inline-flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-6 py-3 rounded-2xl sm:rounded-full shadow-sm border border-slate-200">
-              <span className="font-semibold text-sm sm:text-base text-slate-800">Formulari d'inscripció oficial</span>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-5 py-2.5 rounded-full bg-white shadow-sm border border-slate-200">
+              <span className="font-semibold text-sm sm:text-base text-slate-800">Formulari d'inscripció</span>
               <span className="hidden sm:inline text-slate-300">|</span>
-              <span className="text-xs sm:text-base text-slate-500 font-medium">Formulario de inscripción oficial</span>
+              <span className="text-xs sm:text-sm text-slate-500 font-medium">Formulario de inscripción</span>
             </div>
           </div>
         </div>
@@ -316,7 +318,7 @@ export default function RetirRutlla2026Form() {
                 <p className="text-sm text-slate-700 font-semibold mb-1">A aquest correu t'enviarem el resum de la inscripció. Utilitzarem el telèfon en cas d'incidència.</p>
                 <p className="text-xs text-slate-500 font-medium">A este correo te enviaremos el resumen de la inscripción con todos los detalles y el importe total que debes abonar. Usaremos el teléfono en caso de incidencia.</p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block mb-2">
@@ -550,7 +552,7 @@ export default function RetirRutlla2026Form() {
                 <span className="text-sm font-medium text-slate-400 sm:ml-2 sm:before:content-['|'] sm:before:mr-2 mt-1 sm:mt-0 ml-9 sm:ml-0">Información de Pago</span>
               </h2>
             </div>
-            
+
             <div className="p-5 sm:p-8 space-y-10">
               <div>
                 <label className="block mb-5 text-center sm:text-left">
@@ -625,13 +627,13 @@ export default function RetirRutlla2026Form() {
                   <div className="bg-white/60 p-5 rounded-2xl border border-white shadow-sm">
                     <p className="font-semibold text-slate-800">Es podrà pagar el Retir al complet, fins a 6 pagaments mensuals (de maig a octubre) o en efectiu en un sobre durant l'ofrena.</p>
                     <p className="text-sm font-medium text-slate-600 mt-1.5">Se podrá pagar el Retiro al completo, en hasta 6 pagos mensuales (de mayo a octubre) o en efectivo en un sobre durante la ofrenda.</p>
-                    
+
                     <div className="mt-4 pt-4 border-t border-slate-200/60">
                       <p className="font-bold text-slate-800"><span className="text-rose-600">⚠️ Nota sobre els terminis:</span> En cas d'escollir l'opció de 6 terminis (de maig a octubre), si no es paga cada mes s'haurà d'abonar al complet abans de l'octubre.</p>
                       <p className="text-sm font-medium text-slate-600 mt-1.5"><span className="text-rose-500 font-bold">Nota sobre los plazos:</span> En caso de elegir la opción de 6 plazos (de mayo a octubre), si no se paga cada mes se deberá abonar al completo antes de octubre.</p>
                     </div>
                   </div>
-                  
+
                   <ul className="space-y-4 pl-2">
                     <li className="flex items-start">
                       <div className="flex-shrink-0 w-2 h-2 rounded-full bg-blue-500 mt-2 mr-4 shadow-sm"></div>
@@ -695,20 +697,17 @@ export default function RetirRutlla2026Form() {
               </div>
               <div>
                 <p className="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-widest mb-1">Total a pagar</p>
-                <div className="flex items-baseline space-x-2">
-                  <p className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">{calculateTotal}</p>
-                  <span className="text-2xl font-bold text-slate-600">€</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">{calculateTotal}€</span>
+                  {modalidadPago === '6 plazos' && calculateTotal > 0 && (
+                    <span className="text-xs sm:text-sm font-bold text-indigo-700 bg-indigo-100 px-2 py-1 rounded-lg">
+                      6 x {(calculateTotal / 6).toFixed(2)}€
+                    </span>
+                  )}
                 </div>
-                {modalidadPago === '6 plazos' && calculateTotal > 0 && (
-                  <p className="text-xs sm:text-sm font-semibold text-indigo-600 mt-1 bg-indigo-50 inline-block px-2.5 py-1 rounded-md">
-                    <span className="block sm:inline">6 terminis (maig a octubre) de {(calculateTotal / 6).toFixed(2)}€</span>
-                    <span className="hidden sm:inline mx-1.5 text-indigo-300">|</span>
-                    <span className="block sm:inline text-indigo-600/70 mt-0.5 sm:mt-0">6 plazos (mayo a octubre) de {(calculateTotal / 6).toFixed(2)}€</span>
-                  </p>
-                )}
               </div>
             </div>
-            
+
             {status.type === 'success' && (
               <div className="hidden md:flex flex-col items-end text-green-700 bg-green-50 px-6 py-3.5 rounded-2xl border border-green-200 shadow-sm">
                 <div className="flex items-center font-bold text-lg">

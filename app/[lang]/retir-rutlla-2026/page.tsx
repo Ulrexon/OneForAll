@@ -11,6 +11,7 @@ type Person = {
   opcional: string[];
   altres: string[];
   detalles: string;
+  transporte: string;
 };
 
 const CATEGORIES = [
@@ -39,7 +40,8 @@ export default function RetirRutlla2026Form() {
     categoria: '',
     opcional: [],
     altres: [],
-    detalles: ''
+    detalles: '',
+    transporte: ''
   }]);
 
   const [email, setEmail] = useState('');
@@ -91,7 +93,8 @@ export default function RetirRutlla2026Form() {
       categoria: '',
       opcional: [],
       altres: [],
-      detalles: ''
+      detalles: '',
+      transporte: ''
     }]);
   };
 
@@ -155,9 +158,9 @@ export default function RetirRutlla2026Form() {
       return;
     }
 
-    const isValid = people.every(p => p.nombre.trim() !== '' && p.apellidos.trim() !== '' && p.categoria !== '');
+    const isValid = people.every(p => p.nombre.trim() !== '' && p.apellidos.trim() !== '' && p.categoria !== '' && p.transporte !== '');
     if (!isValid) {
-      setStatus({ type: 'error', message: 'Si us plau, omple els camps obligatoris (Nom, Cognoms i Categoria) per a tots els assistents. / Por favor, rellena los campos obligatorios (Nombre, Apellidos y Categoría) para todos los asistentes.' });
+      setStatus({ type: 'error', message: 'Si us plau, omple els camps obligatoris (Nom, Cognoms, Categoria i Transport) per a tots els assistents. / Por favor, rellena los campos obligatorios (Nombre, Apellidos, Categoría y Transporte) para todos los asistentes.' });
       setIsSubmitting(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -184,6 +187,7 @@ export default function RetirRutlla2026Form() {
           opcional: p.opcional,
           altres: p.altres,
           detalles: p.detalles,
+          Transporte: p.transporte,
           precioPersona: personTotal
         };
       })
@@ -489,6 +493,29 @@ export default function RetirRutlla2026Form() {
                     className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all bg-slate-50/50 hover:bg-slate-50 text-slate-900 resize-none font-medium leading-relaxed"
                     placeholder="Escriu aquí els detalls... / Escribe aquí los detalles..."
                   />
+                </div>
+
+                <div className="pt-8 border-t border-slate-100">
+                  <label className="block mb-5">
+                    <span className="block text-base font-bold text-slate-800">NECESSITES TRANSPORT? <span className="text-red-500">*</span></span>
+                    <span className="block text-sm font-medium text-slate-500 mt-1">¿NECESITAS TRANSPORTE?</span>
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    {['Sí', 'No'].map((opt, i) => (
+                      <label key={i} className={`flex items-center justify-center p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${person.transporte === opt ? 'bg-blue-50/80 border-blue-500 shadow-md ring-1 ring-blue-500' : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm'}`}>
+                        <input
+                          type="radio"
+                          name={`transporte-${person.id}`}
+                          value={opt}
+                          checked={person.transporte === opt}
+                          onChange={(e) => handleChange(person.id, 'transporte', e.target.value)}
+                          className="sr-only"
+                          required
+                        />
+                        <span className={`font-bold text-lg ${person.transporte === opt ? 'text-blue-700' : 'text-slate-700'}`}>{opt}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

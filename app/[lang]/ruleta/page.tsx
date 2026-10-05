@@ -8,7 +8,8 @@ import {
 
 const DEFAULT_ENTRIES = ['Ali', 'Beatriz', 'Charles', 'Diya', 'Eric', 'Fatima', 'Gabriel', 'Hanna'];
 
-const COLORS = ['#63b0e3', '#b17ec6', '#f8df7a', '#89e0af'];
+const COLORS = ['#3369e8', '#d50f25', '#eeb211', '#009925'];
+const TEXT_COLORS = ['#ffffff', '#ffffff', '#000000', '#ffffff'];
 
 const SPIN_DURATION = 10000;
 const TAU = Math.PI * 2;
@@ -51,7 +52,7 @@ export default function RuletaPage() {
   const [results, setResults] = useState<string[]>([]);
   const [isSpinning, setIsSpinning] = useState(false);
   const [hasSpun, setHasSpun] = useState(false);
-  const [winner, setWinner] = useState<{ name: string; index: number; color: string } | null>(null);
+  const [winner, setWinner] = useState<{ name: string; index: number; color: string; textColor: string } | null>(null);
   const [panelOpen, setPanelOpen] = useState(true);
   const [advanced, setAdvanced] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -155,10 +156,11 @@ export default function RuletaPage() {
       const fontSize = Math.max(size * 0.016, Math.min(size * 0.062, (r * seg) * 0.6));
       list.forEach((name, i) => {
         const start = rot + i * seg;
-        const base = COLORS[segmentColor(i, list.length)];
+        const ci = segmentColor(i, list.length);
+        const base = COLORS[ci];
         const grad = ctx.createRadialGradient(c, c, r * 0.15, c, c, r);
         grad.addColorStop(0, base);
-        grad.addColorStop(1, lighten(base, 0.12));
+        grad.addColorStop(1, lighten(base, 0.06));
         ctx.beginPath();
         ctx.moveTo(c, c);
         ctx.arc(c, c, r, start, start + seg);
@@ -169,7 +171,7 @@ export default function RuletaPage() {
         ctx.save();
         ctx.translate(c, c);
         ctx.rotate(start + seg / 2);
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = TEXT_COLORS[ci];
         ctx.font = `600 ${fontSize}px Quicksand, Roboto, system-ui, sans-serif`;
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
@@ -349,7 +351,8 @@ export default function RuletaPage() {
         spinningRef.current = false;
         setIsSpinning(false);
         const name = list[target];
-        setWinner({ name, index: target, color: COLORS[segmentColor(target, list.length)] });
+        const ci = segmentColor(target, list.length);
+        setWinner({ name, index: target, color: COLORS[ci], textColor: TEXT_COLORS[ci] });
         setResults(r => [name, ...r]);
         playFanfare();
         launchConfetti();
@@ -548,7 +551,7 @@ export default function RuletaPage() {
       {winner && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/40 p-4" onClick={() => setWinner(null)}>
           <div className="w-full max-w-[560px] bg-[#1d1d1d] rounded shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            <div className="px-5 py-3.5 text-black font-medium text-[20px]" style={{ backgroundColor: winner.color }}>
+            <div className="px-5 py-3.5 font-medium text-[20px]" style={{ backgroundColor: winner.color, color: winner.textColor }}>
               ¡Tenemos un ganador!
             </div>
             <div className="px-6 py-10 text-center text-[44px] sm:text-[52px] font-medium text-white break-words leading-tight">

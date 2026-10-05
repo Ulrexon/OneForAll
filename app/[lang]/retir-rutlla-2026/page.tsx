@@ -19,6 +19,22 @@ const CATEGORIES = [
   { label: 'INFANT 3-12. COST 60€', value: 60 }
 ];
 
+const CATEGORIES_DIUMENGE = [
+  { label: 'DINAR DIUMENGE +17 ANYS. COST 18€', value: 18 },
+  { label: 'DINAR DIUMENGE FINS A 16 ANYS. COST 16,50€', value: 16.5 }
+];
+
+const ALL_CATEGORIES = [...CATEGORIES, ...CATEGORIES_DIUMENGE];
+
+type TipoInscripcion = '' | 'complet' | 'diumenge';
+
+const TIPOS_INSCRIPCION = [
+  { value: 'complet' as const, ca: 'Retir complet', es: 'Retiro completo', descCa: 'Tots els dies, pensió completa', descEs: 'Todos los días, pensión completa' },
+  { value: 'diumenge' as const, ca: 'Només dinar del diumenge', es: 'Solo comida del domingo', descCa: 'Inscripció abans del 15 d\'octubre', descEs: 'Inscripción antes del 15 de octubre' }
+];
+
+const formatEuros = (n: number) => Number.isInteger(n) ? `${n}` : n.toFixed(2).replace('.', ',');
+
 const OPTIONALS = [
   { label: 'LLENÇOLS I TOVALLOLES. COST ADICIONAL DE 4 €/RETIR', value: 4 },
   { label: 'LLENÇOLS. COST ADICIONAL DE 3€/RETIR', value: 3 }
@@ -45,6 +61,7 @@ export default function RetirRutlla2026Form() {
     transporte: ''
   }]);
 
+  const [tipo, setTipo] = useState<TipoInscripcion>('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [formaPago, setFormaPago] = useState('');
@@ -74,7 +91,7 @@ export default function RetirRutlla2026Form() {
   const calculateTotal = useMemo(() => {
     return people.reduce((acc, person) => {
       let personTotal = 0;
-      const cat = CATEGORIES.find(c => c.label === person.categoria);
+      const cat = ALL_CATEGORIES.find(c => c.label === person.categoria);
       if (cat) personTotal += cat.value;
 
       person.opcional.forEach(opt => {
@@ -85,6 +102,16 @@ export default function RetirRutlla2026Form() {
       return acc + personTotal;
     }, 0);
   }, [people]);
+
+  const handleTipoChange = (nuevoTipo: TipoInscripcion) => {
+    if (nuevoTipo === tipo) return;
+    setTipo(nuevoTipo);
+    // Las categorías, opcionales y transporte dependen del tipo: se reinician al cambiar
+    setPeople(people.map(p => ({ ...p, categoria: '', opcional: [], transporte: '' })));
+    setModalidadPago('');
+    if (nuevoTipo === 'diumenge' && formaPago === 'Tarjeta') setFormaPago('');
+    setStatus({ type: null, message: '' });
+  };
 
   const handleAddPerson = () => {
     setPeople([...people, {
@@ -131,6 +158,15 @@ export default function RetirRutlla2026Form() {
     setIsSubmitting(true);
     setStatus({ type: null, message: '' });
 
+    if (!tipo) {
+      setStatus({ type: 'error', message: 'Si us plau, selecciona el tipus d\'inscripció. / Por favor, selecciona el tipo de inscripción.' });
+      setIsSubmitting(false);
+      setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+      return;
+    }
+
+    const esDiumenge = tipo === 'diumenge';
+
     if (!email.trim() || !email.includes('@')) {
       setStatus({ type: 'error', message: 'Si us plau, introdueix un correu electrònic vàlid. / Por favor, introduce un correo electrónico válido de contacto.' });
       setIsSubmitting(false);
@@ -152,28 +188,35 @@ export default function RetirRutlla2026Form() {
       return;
     }
 
-    if (!modalidadPago) {
+    if (!esDiumenge && !modalidadPago) {
       setStatus({ type: 'error', message: 'Si us plau, selecciona una modalitat de pagament. / Por favor, selecciona una modalidad de pago.' });
       setIsSubmitting(false);
       setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
       return;
     }
 
-    const isValid = people.every(p => p.nombre.trim() !== '' && p.apellidos.trim() !== '' && p.categoria !== '' && p.transporte !== '');
+    const isValid = people.every(p => p.nombre.trim() !== '' && p.apellidos.trim() !== '' && p.categoria !== '' && (esDiumenge || p.transporte !== ''));
     if (!isValid) {
-      setStatus({ type: 'error', message: 'Si us plau, omple els camps obligatoris (Nom, Cognoms, Categoria i Transport) per a tots els assistents. / Por favor, rellena los campos obligatorios (Nombre, Apellidos, Categoría y Transporte) para todos los asistentes.' });
+      setStatus({
+        type: 'error',
+        message: esDiumenge
+          ? 'Si us plau, omple els camps obligatoris (Nom, Cognoms i Categoria) per a tots els assistents. / Por favor, rellena los campos obligatorios (Nombre, Apellidos y Categoría) para todos los asistentes.'
+          : 'Si us plau, omple els camps obligatoris (Nom, Cognoms, Categoria i Transport) per a tots els assistents. / Por favor, rellena los campos obligatorios (Nombre, Apellidos, Categoría y Transporte) para todos los asistentes.'
+      });
       setIsSubmitting(false);
       setTimeout(() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }), 50);
       return;
     }
 
+    // Mismo payload para ambos tipos: los campos que no aplican al domingo se envían vacíos
     const payload = {
+      tipoInscripcion: esDiumenge ? 'Només dinar diumenge' : 'Retir complet',
       emailContacto: email.trim(),
       formaPago,
-      modalidadPago,
+      modalidadPago: esDiumenge ? '' : modalidadPago,
       people: people.map(p => {
         let personTotal = 0;
-        const cat = CATEGORIES.find(c => c.label === p.categoria);
+        const cat = ALL_CATEGORIES.find(c => c.label === p.categoria);
         if (cat) personTotal += cat.value;
         p.opcional.forEach(opt => {
           const o = OPTIONALS.find(x => x.label === opt);
@@ -185,10 +228,10 @@ export default function RetirRutlla2026Form() {
           apellidos: p.apellidos,
           telefono: telefono.trim(),
           categoria: p.categoria,
-          opcional: p.opcional,
+          opcional: esDiumenge ? [] : p.opcional,
           altres: p.altres,
           detalles: p.detalles,
-          transporte: p.transporte,
+          transporte: esDiumenge ? '' : p.transporte,
           precioPersona: personTotal
         };
       })
@@ -229,6 +272,22 @@ export default function RetirRutlla2026Form() {
         <div className="flex flex-col">
           <span className="font-bold text-slate-800 text-sm sm:text-base">INFANT <span className="text-slate-500 font-normal text-xs sm:text-sm">/ INFANTIL (3-12)</span></span>
           <span className="text-sm font-semibold text-blue-600 mt-1">60€</span>
+        </div>
+      );
+    }
+    if (label === 'DINAR DIUMENGE +17 ANYS. COST 18€') {
+      return (
+        <div className="flex flex-col">
+          <span className="font-bold text-slate-800 text-sm sm:text-base">A PARTIR DE 17 ANYS <span className="text-slate-500 font-normal text-xs sm:text-sm">/ A PARTIR DE 17 AÑOS</span></span>
+          <span className="text-sm font-semibold text-blue-600 mt-1">18€</span>
+        </div>
+      );
+    }
+    if (label === 'DINAR DIUMENGE FINS A 16 ANYS. COST 16,50€') {
+      return (
+        <div className="flex flex-col">
+          <span className="font-bold text-slate-800 text-sm sm:text-base">FINS A 16 ANYS <span className="text-slate-500 font-normal text-xs sm:text-sm">/ HASTA 16 AÑOS</span></span>
+          <span className="text-sm font-semibold text-blue-600 mt-1">16,50€</span>
         </div>
       );
     }
@@ -300,6 +359,47 @@ export default function RetirRutlla2026Form() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8 pb-40">
+          {/* Tipo de inscripción */}
+          <div className="bg-white sm:rounded-3xl shadow-sm sm:shadow-lg overflow-hidden border-y sm:border border-slate-200 transition-all duration-300">
+            <div className="bg-slate-900 px-5 sm:px-8 py-5">
+              <h2 className="text-xl font-bold text-white flex flex-col sm:flex-row sm:items-center">
+                <div className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>Tipus d&apos;Inscripció</span>
+                </div>
+                <span className="text-sm font-medium text-slate-400 sm:ml-2 sm:before:content-['|'] sm:before:mr-2 mt-1 sm:mt-0 ml-9 sm:ml-0">Tipo de Inscripción</span>
+              </h2>
+            </div>
+            <div className="p-5 sm:p-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {TIPOS_INSCRIPCION.map((t) => (
+                  <label key={t.value} className={`flex items-start p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${tipo === t.value ? 'bg-blue-50/80 border-blue-500 shadow-md ring-1 ring-blue-500' : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm'}`}>
+                    <div className="flex-shrink-0 mt-0.5">
+                      <input
+                        type="radio"
+                        name="tipoInscripcion"
+                        value={t.value}
+                        checked={tipo === t.value}
+                        onChange={() => handleTipoChange(t.value)}
+                        className="w-5 h-5 text-blue-600 focus:ring-blue-500 border-slate-300"
+                        required
+                      />
+                    </div>
+                    <div className="ml-4 flex-1 flex flex-col">
+                      <span className="font-bold text-slate-800 text-sm sm:text-base">{t.ca}</span>
+                      <span className="text-slate-500 text-xs sm:text-sm">{t.es}</span>
+                      <span className="text-xs font-semibold text-blue-600 mt-2">{t.descCa}</span>
+                      <span className="text-xs text-slate-500">{t.descEs}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {tipo && (<>
           {/* Email y Teléfono de Contacto */}
           <div className="bg-white sm:rounded-3xl shadow-sm sm:shadow-lg overflow-hidden border-y sm:border border-slate-200 transition-all duration-300">
             <div className="bg-slate-900 px-5 sm:px-8 py-5">
@@ -412,11 +512,11 @@ export default function RetirRutlla2026Form() {
 
                 <div className="pt-8 border-t border-slate-100">
                   <label className="block mb-5">
-                    <span className="block text-base font-bold text-slate-800">CATEGORIA PENSIÓ COMPLETA <span className="text-red-500">*</span></span>
-                    <span className="block text-sm font-medium text-slate-500 mt-1">CATEGORÍA PENSIÓN COMPLETA</span>
+                    <span className="block text-base font-bold text-slate-800">{tipo === 'diumenge' ? 'CATEGORIA DINAR DIUMENGE' : 'CATEGORIA PENSIÓ COMPLETA'} <span className="text-red-500">*</span></span>
+                    <span className="block text-sm font-medium text-slate-500 mt-1">{tipo === 'diumenge' ? 'CATEGORÍA COMIDA DOMINGO' : 'CATEGORÍA PENSIÓN COMPLETA'}</span>
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {CATEGORIES.map((cat, i) => (
+                    {(tipo === 'diumenge' ? CATEGORIES_DIUMENGE : CATEGORIES).map((cat, i) => (
                       <label key={i} className={`flex items-start p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${person.categoria === cat.label ? 'bg-blue-50/80 border-blue-500 shadow-md ring-1 ring-blue-500' : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm'}`}>
                         <div className="flex-shrink-0 mt-0.5">
                           <input
@@ -437,6 +537,7 @@ export default function RetirRutlla2026Form() {
                   </div>
                 </div>
 
+                {tipo === 'complet' && (
                 <div className="pt-8 border-t border-slate-100">
                   <label className="block mb-5">
                     <span className="block text-base font-bold text-slate-800">OPCIONAL</span>
@@ -460,6 +561,7 @@ export default function RetirRutlla2026Form() {
                     ))}
                   </div>
                 </div>
+                )}
 
                 <div className="pt-8 border-t border-slate-100">
                   <label className="block mb-5">
@@ -497,6 +599,7 @@ export default function RetirRutlla2026Form() {
                   />
                 </div>
 
+                {tipo === 'complet' && (
                 <div className="pt-8 border-t border-slate-100">
                   <label className="block mb-5">
                     <span className="block text-base font-bold text-slate-800">NECESSITES TRANSPORT? <span className="text-red-500">*</span></span>
@@ -519,6 +622,7 @@ export default function RetirRutlla2026Form() {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
             </div>
           ))}
@@ -559,12 +663,12 @@ export default function RetirRutlla2026Form() {
                   <span className="block text-base font-bold text-slate-800">FORMA DE PAGAMENT <span className="text-red-500">*</span></span>
                   <span className="block text-sm font-medium text-slate-500 mt-1">FORMA DE PAGO</span>
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className={`grid grid-cols-1 gap-4 ${tipo === 'diumenge' ? 'sm:grid-cols-2' : 'sm:grid-cols-3'}`}>
                   {[
                     { value: 'Transferencia', ca: 'Transferència', es: 'Transferencia' },
                     { value: 'Efectivo', ca: 'Efectiu', es: 'Efectivo' },
                     { value: 'Tarjeta', ca: 'Targeta', es: 'Tarjeta' }
-                  ].map((fp, i) => (
+                  ].filter(fp => tipo !== 'diumenge' || fp.value !== 'Tarjeta').map((fp, i) => (
                     <label key={i} className={`flex items-center justify-center p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${formaPago === fp.value ? 'bg-green-50/80 border-green-500 shadow-md ring-1 ring-green-500' : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm'}`}>
                       <input
                         type="radio"
@@ -584,6 +688,7 @@ export default function RetirRutlla2026Form() {
                 </div>
               </div>
 
+              {tipo === 'complet' && (
               <div className="pt-8 border-t border-slate-100">
                 <label className="block mb-5 text-center sm:text-left">
                   <span className="block text-base font-bold text-slate-800">MODALITAT DE PAGAMENT <span className="text-red-500">*</span></span>
@@ -612,6 +717,7 @@ export default function RetirRutlla2026Form() {
                   ))}
                 </div>
               </div>
+              )}
 
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200/60 rounded-3xl p-6 sm:p-8 mt-10 shadow-sm">
                 <h3 className="text-blue-900 font-bold mb-5 flex flex-col sm:flex-row sm:items-center text-lg">
@@ -624,6 +730,12 @@ export default function RetirRutlla2026Form() {
                   <span className="text-sm font-medium text-blue-700/70 sm:ml-2 sm:before:content-['|'] sm:before:mr-2 mt-1 sm:mt-0 ml-8 sm:ml-0">Información Importante</span>
                 </h3>
                 <div className="text-blue-900 space-y-5">
+                  {tipo === 'diumenge' ? (
+                  <div className="bg-white/60 p-5 rounded-2xl border border-white shadow-sm">
+                    <p className="font-semibold text-slate-800"><span className="text-rose-600">⚠️</span> El dinar del diumenge s&apos;ha de pagar <span className="text-rose-600 font-bold">abans del 15 d&apos;octubre</span>, per transferència o en efectiu.</p>
+                    <p className="text-sm font-medium text-slate-600 mt-1.5">La comida del domingo se debe pagar <span className="text-rose-500 font-bold">antes del 15 de octubre</span>, por transferencia o en efectivo.</p>
+                  </div>
+                  ) : (
                   <div className="bg-white/60 p-5 rounded-2xl border border-white shadow-sm">
                     <p className="font-semibold text-slate-800">Es podrà pagar el Retir al complet, fins a 6 pagaments mensuals (de maig a octubre) o en efectiu en un sobre durant l'ofrena.</p>
                     <p className="text-sm font-medium text-slate-600 mt-1.5">Se podrá pagar el Retiro al completo, en hasta 6 pagos mensuales (de mayo a octubre) o en efectivo en un sobre durante la ofrenda.</p>
@@ -633,6 +745,7 @@ export default function RetirRutlla2026Form() {
                       <p className="text-sm font-medium text-slate-600 mt-1.5"><span className="text-rose-500 font-bold">Nota sobre los plazos:</span> En caso de elegir la opción de 6 plazos (de mayo a octubre), si no se paga cada mes se deberá abonar al completo antes de octubre.</p>
                     </div>
                   </div>
+                  )}
 
                   <ul className="space-y-4 pl-2">
                     <li className="flex items-start">
@@ -684,6 +797,7 @@ export default function RetirRutlla2026Form() {
               </div>
             </button>
           </div>
+          </>)}
         </form>
 
         {/* Floating Total Price Bar */}
@@ -698,7 +812,7 @@ export default function RetirRutlla2026Form() {
               <div>
                 <p className="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-widest mb-1">Total a pagar</p>
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">{calculateTotal}€</span>
+                  <span className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">{formatEuros(calculateTotal)}€</span>
                   {modalidadPago === '6 plazos' && calculateTotal > 0 && (
                     <span className="text-xs sm:text-sm font-bold text-indigo-700 bg-indigo-100 px-2 py-1 rounded-lg">
                       6 x {(calculateTotal / 6).toFixed(2)}€
